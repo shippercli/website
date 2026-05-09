@@ -1,64 +1,74 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex flex-col flex-1">
+      <main className="flex flex-1 w-full flex-col">
+        <section className="max-w-6xl mx-auto px-6 pt-20 pb-12 text-center">
+          <p className="text-blue-500 font-semibold text-sm uppercase tracking-widest mb-4">Declarative Deployments</p>
+          <h1 className="max-w-xs text-4xl md:text-5xl font-extrabold leading-tight mb-4 mx-auto text-foreground">
+            Deploy like infrastructure.<br />Feel like Laravel.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg max-w-xl mx-auto mb-10 text-muted-foreground">
+            Provider-agnostic deployments from a single YAML file. Plan, review, apply.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+          <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto text-left">
+            <div className="flex-1 bg-zinc-900 rounded-lg p-6 font-mono text-sm">
+              <div className="text-blue-400 mb-1">shipper.yml</div>
+              <div className="text-zinc-400">providers:</div>
+              <div className="text-zinc-400 ml-4">ploi:</div>
+              <div className="text-zinc-400 ml-8">server_id: &quot;105556&quot;</div>
+              <div className="text-zinc-400 mt-2">projects:</div>
+              <div className="text-zinc-400 ml-4">api:</div>
+              <div className="text-zinc-400 ml-8">provider: ploi</div>
+              <div className="text-zinc-400 ml-8">domain: &quot;api.example.com&quot;</div>
+              <div className="text-zinc-400 ml-8">profiles:</div>
+              <div className="text-zinc-400 ml-12">production:</div>
+              <div className="text-zinc-400 ml-16">branch: main</div>
+            </div>
+
+            <div className="flex-1 bg-zinc-900 rounded-lg p-6 font-mono text-sm">
+              <div className="text-green-400 mb-1">Terminal</div>
+              <div className="text-zinc-300">$ composer require ulties/shipper</div>
+              <div className="mt-3 text-zinc-300">$ shipper plan api --profile=production</div>
+              <div className="text-green-400 mt-1">+ Create site api.example.com</div>
+              <div className="text-green-400">+ Configure SSL (Let&apos;s Encrypt)</div>
+              <div className="text-green-400">+ Link database shipper_api_prod</div>
+              <div className="text-green-400">+ Deploy from main branch</div>
+              <div className="mt-3 text-zinc-300">$ shipper apply api --profile=production</div>
+              <div className="text-blue-400 mt-2">✓ All resources applied successfully</div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-zinc-200 dark:border-zinc-800">
+          <div className="max-w-6xl mx-auto px-6 py-16">
+            <h2 className="text-2xl font-bold text-center mb-10">Everything you need to ship</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { title: "Provider Agnostic", desc: "Ploi, Forge, and more. One config, any provider." },
+                { title: "Plan & Apply", desc: "Preview changes before deploying. No surprises." },
+                { title: "Database Lifecycle", desc: "Create, link, and manage databases automatically." },
+                { title: "PR Previews", desc: "Spin up preview environments for every pull request." },
+                { title: "GitHub Actions", desc: "CI/CD out of the box. Deploy on push or PR." },
+                { title: "Config Validation", desc: "Catch misconfigurations before they hit production." },
+              ].map((f) => (
+                <div key={f.title} className="bg-zinc-100 dark:bg-zinc-900 rounded-lg p-6">
+                  <h3 className="font-semibold mb-2">{f.title}</h3>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-zinc-200 dark:border-zinc-800">
+          <div className="max-w-6xl mx-auto px-6 py-16 text-center">
+            <h2 className="text-xl font-semibold mb-4">Ready to ship?</h2>
+            <code className="bg-zinc-100 dark:bg-zinc-900 rounded-lg px-6 py-3 font-mono text-sm inline-block">
+              $ composer require ulties/shipper
+            </code>
+          </div>
+        </section>
       </main>
     </div>
   );
