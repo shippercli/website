@@ -5,7 +5,7 @@
 Install Shipper via Composer:
 
 ```bash
-composer require shippercli/cli
+composer global require shippercli/cli
 ```
 
 ## Configuration

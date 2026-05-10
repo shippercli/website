@@ -9,9 +9,11 @@
     "sync-content": "mkdir -p docs spec && git clone --depth 1 https://github.com/shippercli/docs.git docs-tmp && cp -r docs-tmp/v1/* docs/ && rm -rf docs-tmp && git clone --depth 1 https://github.com/shippercli/specs.git spec-tmp && cp -r spec-tmp/* spec/ && rm -rf spec-tmp"
   },
   "dependencies": {
+    "mcp-handler": "^1.1.0",
     "next": "16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

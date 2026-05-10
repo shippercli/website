@@ -28,7 +28,7 @@ export default function Home() {
 
             <div className="flex-1 bg-zinc-900 rounded-lg p-6 font-mono text-sm">
               <div className="text-green-400 mb-1">Terminal</div>
-              <div className="text-zinc-300">$ composer require shippercli/cli</div>
+              <div className="text-zinc-300">$ composer global require shippercli/cli</div>
               <div className="mt-3 text-zinc-300">$ shipper plan api --profile=production</div>
               <div className="text-green-400 mt-1">+ Create site api.example.com</div>
               <div className="text-green-400">+ Configure SSL (Let&apos;s Encrypt)</div>
@@ -65,7 +65,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-6 py-16 text-center">
             <h2 className="text-xl font-semibold mb-4">Ready to ship?</h2>
             <code className="bg-zinc-100 dark:bg-zinc-900 rounded-lg px-6 py-3 font-mono text-sm inline-block">
-              $ composer require shippercli/cli
+              $ composer global require shippercli/cli
             </code>
           </div>
         </section>
