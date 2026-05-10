@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="border-t py-12 mt-20" style={{ borderColor: "var(--border)" }}>
