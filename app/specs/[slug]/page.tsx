@@ -64,7 +64,7 @@ export default async function SpecPage({ params }: { params: Promise<{ slug: str
             <span className="text-foreground">{spec.title}</span>
           </div>
 
-          <div className="prose prose-zinc dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: spec.content.replace(/^#\s+(.+)$/m, "").trim() }} />
+          <div className="prose prose-slate dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: spec.content.replace(/^#\s+(.+)$/m, "").trim() }} />
 
           <div className="flex items-center justify-between mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-800">
             <div>
