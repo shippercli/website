@@ -1,17 +1,12 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "./nav.css";
 
 export default function Nav({ active }: { active?: "docs" | "specs" }) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <nav className="border-b" style={{ borderColor: "var(--border)" }}>
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
-        <Link href="/">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl border-b" style={{ borderColor: "var(--border)", background: "rgba(255,255,255,0.8)" }}>
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="https://raw.githubusercontent.com/shippercli/assets/main/logo-transparent.svg"
             alt="Shipper"
@@ -19,38 +14,22 @@ export default function Nav({ active }: { active?: "docs" | "specs" }) {
             height={28}
             className="h-7 w-auto"
           />
+          <span className="font-bold text-lg" style={{ color: "var(--foreground)" }}>Shipper</span>
         </Link>
 
-        <div className="hidden sm:flex items-center gap-6 text-sm">
+        <div className="hidden sm:flex items-center gap-8 text-sm">
           <Link href="/docs" style={{ color: active === "docs" ? "var(--accent)" : "var(--text-secondary)" }}>Docs</Link>
           <Link href="/specs" style={{ color: active === "specs" ? "var(--accent)" : "var(--text-secondary)" }}>Specs</Link>
+          <a href="https://github.com/shippercli/cli" target="_blank" rel="noopener" style={{ color: "var(--text-secondary)" }}>GitHub</a>
           <Link href="/docs" className="nav-button">Get Started</Link>
         </div>
 
-        <button
-          className="sm:hidden p-2"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            {open ? (
-              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
-            ) : (
-              <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
-            )}
+        <button className="sm:hidden p-2" aria-label="Menu">
+          <svg width="20" height="20" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 10h16M4 14h16" />
           </svg>
         </button>
       </div>
-
-      {open && (
-        <div className="sm:hidden border-t" style={{ borderColor: "var(--border)" }}>
-          <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
-            <Link href="/docs" style={{ color: "var(--text-secondary)" }}>Docs</Link>
-            <Link href="/specs" style={{ color: "var(--text-secondary)" }}>Specs</Link>
-            <Link href="/docs" className="nav-button text-center">Get Started</Link>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
