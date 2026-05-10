@@ -64,7 +64,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
             <span className="text-foreground">{doc.title}</span>
           </div>
 
-          <div className="prose prose-slate dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: doc.content.replace(/^#\s+(.+)$/m, "").trim() }} />
+          <div className="prose prose-slate max-w-none text-foreground [&_p]:text-foreground [&_h1]:text-foreground [&_h2]:text-foreground [&_h3]:text-foreground [&_code]:text-foreground" dangerouslySetInnerHTML={{ __html: doc.content.replace(/^#\s+(.+)$/m, "").trim() }} />
 
           <div className="flex items-center justify-between mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-800">
             <div>
