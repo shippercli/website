@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const DOCS_PATH = path.join(process.cwd(), "..", "docs", "v1");
+const DOCS_PATH = path.join(process.cwd(), "docs");
 
 export interface DocPage {
   slug: string;

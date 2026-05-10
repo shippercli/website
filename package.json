@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "npm run sync-content && next build",
+    "start": "next start",
+    "sync-content": "mkdir -p docs spec && git clone --depth 1 https://github.com/shippercli/docs.git docs-tmp && cp -r docs-tmp/v1/* docs/ && rm -rf docs-tmp && git clone --depth 1 https://github.com/shippercli/specs.git spec-tmp && cp -r spec-tmp/* spec/ && rm -rf spec-tmp"
   },
   "dependencies": {
     "next": "16.2.6",

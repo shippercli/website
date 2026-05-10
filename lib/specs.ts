@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const SPECS_PATH = path.join(process.cwd(), "..", "specs");
+const SPECS_PATH = path.join(process.cwd(), "spec");
 
 export interface SpecPage {
   slug: string;
