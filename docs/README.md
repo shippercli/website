@@ -168,8 +168,8 @@ Shipper handles:
 
 ### Getting Help
 
-- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/shippercli/cli/issues)
-- **Discussions**: Ask questions on [GitHub Discussions](https://github.com/shippercli/cli/discussions)
+- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/ulties/shipper/issues)
+- **Discussions**: Ask questions on [GitHub Discussions](https://github.com/ulties/shipper/discussions)
 - **Documentation**: Browse this comprehensive documentation
 
 ### Contributing
@@ -245,7 +245,7 @@ Shipper is open-source software licensed under the MIT license.
 
 ## Updates and Changelog
 
-Check the [releases page](https://github.com/shippercli/cli/releases) for:
+Check the [releases page](https://github.com/ulties/shipper/releases) for:
 - New features
 - Bug fixes
 - Breaking changes

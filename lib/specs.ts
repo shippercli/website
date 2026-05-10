@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { marked } from "marked";
 
 const SPECS_PATH = path.join(process.cwd(), "spec");
 
@@ -13,6 +14,11 @@ function extractTitle(content: string): string {
   const match = content.match(/^#\s+(.+)$/m);
   return match ? match[1] : "Untitled";
 }
+
+marked.setOptions({
+  gfm: true,
+  breaks: false,
+});
 
 export function getAllSpecs(): SpecPage[] {
   if (!fs.existsSync(SPECS_PATH)) return [];
@@ -31,7 +37,8 @@ export function getSpec(slug: string): SpecPage | null {
   const filePath = path.join(SPECS_PATH, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
   const content = fs.readFileSync(filePath, "utf-8");
-  return { slug, title: extractTitle(content), content };
+  const htmlContent = marked.parse(content) as string;
+  return { slug, title: extractTitle(content), content: htmlContent };
 }
 
 export function getSpecsNavigation(): Record<string, { slug: string; title: string }[]> {

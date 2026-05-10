@@ -32,7 +32,7 @@ projects:
     path: ./api
     repository:
       provider: github
-      name: shippercli/cli
+      name: ulties/shipper
     databases:
       main:
         name: "shipper_${PROJECT_NAME}_${PROFILE}_${GITHUB_PR_NUMBER}"
@@ -206,7 +206,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Deploy Preview
-        uses: shippercli/cli/.github/actions/shipper@main
+        uses: ulties/shipper/.github/actions/shipper@main
         with:
           command: apply
           project: ${{ matrix.project }}
