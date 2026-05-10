@@ -19,7 +19,7 @@ export default function Nav({ active }: { active?: "docs" | "specs" }) {
         }}
       >
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 transition-colors">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="https://raw.githubusercontent.com/shippercli/assets/main/logo-transparent.png"
               alt="Shipper"
@@ -27,7 +27,6 @@ export default function Nav({ active }: { active?: "docs" | "specs" }) {
               height={32}
               className="h-8 w-auto"
             />
-            <span className="text-lg font-bold" style={{ color: "var(--foreground)" }}>Shipper</span>
           </Link>
           <div className="flex items-center gap-8 text-sm">
             <Link
