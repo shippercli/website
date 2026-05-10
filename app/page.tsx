@@ -5,10 +5,10 @@ export default function Home() {
         <section className="max-w-6xl mx-auto px-6 pt-20 pb-12 text-center">
           <p className="text-blue-500 font-semibold text-sm uppercase tracking-widest mb-4">Declarative Deployments</p>
           <h1 className="max-w-xs text-4xl md:text-5xl font-extrabold leading-tight mb-4 mx-auto text-foreground">
-            Deploy like infrastructure.<br />Feel like Laravel.
+            Deploy like infrastructure.<br />Ship like a pro.
           </h1>
           <p className="text-lg max-w-xl mx-auto mb-10 text-muted-foreground">
-            Provider-agnostic deployments from a single YAML file. Plan, review, apply.
+            Declarative deployments from a single YAML file. Plan changes, review them, then apply.
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto text-left">
