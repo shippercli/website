@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import "./nav.css";
 
 export default function Nav({ active }: { active?: "docs" | "specs" }) {
   return (
@@ -74,13 +75,7 @@ export default function Nav({ active }: { active?: "docs" | "specs" }) {
             </Link>
             <Link
               href="/docs"
-              className="rounded-lg px-5 py-2 font-medium transition-all"
-              style={{
-                background: "var(--accent)",
-                color: "white",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
+              className="nav-button"
             >
               Get Started
             </Link>
