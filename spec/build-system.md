@@ -77,8 +77,8 @@ composer build
 ### Release URL Patterns
 
 ```
-Latest:     https://github.com/ulties/shipper/releases/latest/download/shipper
-Tagged v1:  https://github.com/ulties/shipper/releases/download/v1.0.0/shipper
+Latest:     https://github.com/shippercli/cli/releases/latest/download/shipper
+Tagged v1:  https://github.com/shippercli/cli/releases/download/v1.0.0/shipper
 ```
 
 ## Functional Requirements

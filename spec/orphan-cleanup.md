@@ -75,7 +75,7 @@ cleanup-orphaned
 
 **Required environment variables:**
 - `GITHUB_TOKEN` — GitHub personal access token with `repo` scope
-- `GITHUB_REPOSITORY` — Repository in format `owner/repo` (e.g., `ulties/shipper`)
+- `GITHUB_REPOSITORY` — Repository in format `owner/repo` (e.g., `shippercli/cli`)
 
 ## Data Contracts
 

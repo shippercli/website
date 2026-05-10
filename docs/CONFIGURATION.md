@@ -69,7 +69,7 @@ projects:
     path: ./examples/api
     repository:
       provider: github
-      name: ulties/shipper
+      name: shippercli/cli
     web_directory: /public
     project_root: /
     databases:
@@ -231,7 +231,7 @@ projects:
     path: ./api
     repository:
       provider: github
-      name: ulties/shipper
+      name: shippercli/cli
     web_directory: /public
     project_root: /
     databases:
@@ -256,7 +256,7 @@ projects:
     path: ./frontend
     repository:
       provider: github
-      name: ulties/shipper
+      name: shippercli/cli
     web_directory: /public
     project_root: /
     profiles:
