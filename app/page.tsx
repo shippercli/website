@@ -2,203 +2,146 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1">
-      <div className="geometric-bg">
-        <div className="grid-lines" />
-        <div className="cube cube-top-right" />
-        <div className="cube cube-bottom-left" />
-        <div className="cube cube-right-middle" />
-      </div>
+    <main style={{ position: "relative", minHeight: "100vh" }}>
+      <div className="glow glow-1" />
+      <div className="glow glow-2" />
 
-      <main className="flex flex-1 w-full flex-col content-wrapper">
-        <section className="max-w-6xl mx-auto px-6 pt-24 pb-16 text-center">
-          <p
-            className="text-sm font-semibold uppercase tracking-widest mb-6"
-            style={{ color: "var(--accent)" }}
-          >
-            Declarative Deployments
-          </p>
-          <h1
-            className="max-w-2xl text-5xl md:text-6xl font-bold leading-tight mb-6 mx-auto"
-            style={{ color: "var(--foreground)" }}
-          >
-            Deploy like infrastructure.
-            <br />
-            Ship like a pro.
-          </h1>
-          <p
-            className="text-lg max-w-xl mx-auto mb-12"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            Declarative deployments from a single YAML file. Plan changes,
-            review them, then apply.
-          </p>
+      <section className="section-padding" style={{ position: "relative", zIndex: 1 }}>
+        <div className="max-width">
+          <nav className="flex items-center justify-between mb-24">
+            <div className="flex items-center gap-3">
+              <Image
+                src="https://raw.githubusercontent.com/shippercli/assets/main/logo-transparent.svg"
+                alt="Shipper"
+                width={28}
+                height={28}
+                className="h-7 w-auto invert"
+              />
+              <span className="font-bold text-lg">Shipper</span>
+            </div>
+            <div className="flex items-center gap-8 text-sm" style={{ color: "var(--text-secondary)" }}>
+              <a href="/docs">Docs</a>
+              <a href="/specs">Specs</a>
+              <a href="https://github.com/shippercli/cli" target="_blank" rel="noopener">GitHub</a>
+              <a href="/docs" className="btn-primary" style={{ padding: "10px 20px", fontSize: "13px" }}>Get Started</a>
+            </div>
+          </nav>
 
-          <div className="flex flex-col md:flex-row gap-6 max-w-5xl mx-auto text-left">
-            <div
-              className="flex-1 backdrop-blur-xl rounded-2xl p-8 border"
-              style={{
-                background: "var(--surface-glass)",
-                borderColor: "var(--border)",
-                boxShadow: "0 8px 32px rgba(122, 162, 255, 0.08)",
-              }}
-            >
-              <div className="font-mono text-sm">
-                <div className="mb-2" style={{ color: "var(--accent)" }}>
-                  shipper.yml
-                </div>
-                <div style={{ color: "var(--text-secondary)" }}>providers:</div>
-                <div className="ml-4" style={{ color: "var(--text-secondary)" }}>
-                  ploi:
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  server_id: &quot;105556&quot;
-                </div>
-                <div className="mt-3" style={{ color: "var(--text-secondary)" }}>
-                  projects:
-                </div>
-                <div className="ml-4" style={{ color: "var(--text-secondary)" }}>
-                  api:
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  provider: ploi
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  domain: &quot;api.example.com&quot;
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  profiles:
-                </div>
-                <div className="ml-12" style={{ color: "var(--text-muted)" }}>
-                  production:
-                </div>
-                <div className="ml-16" style={{ color: "var(--text-muted)" }}>
-                  branch: main
-                </div>
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8 border" style={{ background: "var(--accent-light)", borderColor: "var(--border)" }}>
+              <span className="w-2 h-2 rounded-full" style={{ background: "#4ade80" }} />
+              <span className="text-xs font-medium" style={{ color: "var(--text-secondary)" }}>Now supporting Laravel Forge</span>
+            </div>
+
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8" style={{ lineHeight: 0.95 }}>
+              Deploy like<br />infrastructure.
+            </h1>
+
+            <p className="text-xl mb-12 leading-relaxed max-w-xl" style={{ color: "var(--text-secondary)" }}>
+              Shipper brings the power of infrastructure-as-code to application deployments.
+              One config file. Any provider. Total control.
+            </p>
+
+            <div className="flex gap-4">
+              <a href="/docs" className="btn-primary">Get Started</a>
+              <a href="https://github.com/shippercli/cli" target="_blank" rel="noopener" className="btn-secondary">View on GitHub</a>
+            </div>
+
+            <div className="mt-16 p-6 rounded-2xl border" style={{ background: "var(--background-alt)", borderColor: "var(--border)", maxWidth: "600px" }}>
+              <div className="mb-3 text-sm font-medium" style={{ color: "var(--accent)" }}>shipper.yml</div>
+              <code style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
+                <pre>{`providers:
+  ploi:
+    api_key: \${PLOI_API_KEY}
+    server_id: "105556"
+
+projects:
+  api:
+    provider: ploi
+    domain: "api.example.com"
+    profiles:
+      production:
+        branch: main`}</pre>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{ background: "var(--background-alt)", position: "relative", zIndex: 1 }}>
+        <div className="max-width">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Plan & Apply",
+                desc: "Preview every change before it happens. No surprises.",
+                icon: "✓",
+              },
+              {
+                title: "Database Lifecycle",
+                desc: "Create, link, and destroy databases automatically.",
+                icon: "◉",
+              },
+              {
+                title: "PR Previews",
+                desc: "Spin up preview environments for every pull request.",
+                icon: "⚡",
+              },
+              {
+                title: "GitHub Actions",
+                desc: "First-class CI/CD integration.",
+                icon: "▶",
+              },
+              {
+                title: "SSL Certificates",
+                desc: "Provision and manage SSL automatically.",
+                icon: "🔒",
+              },
+              {
+                title: "Config Validation",
+                desc: "Catch misconfigurations before production.",
+                icon: "⚠",
+              },
+            ].map((feature) => (
+              <div key={feature.title} className="card">
+                <div className="text-2xl mb-4">{feature.icon}</div>
+                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>{feature.desc}</p>
               </div>
-            </div>
-
-            <div
-              className="flex-1 backdrop-blur-xl rounded-2xl p-8 border"
-              style={{
-                background: "var(--surface-glass)",
-                borderColor: "var(--border)",
-                boxShadow: "0 8px 32px rgba(122, 162, 255, 0.08)",
-              }}
-            >
-              <div className="font-mono text-sm">
-                <div className="mb-3" style={{ color: "#4ade80" }}>
-                  Terminal
-                </div>
-                <div style={{ color: "var(--text-secondary)" }}>
-                  $ composer global require shippercli/cli
-                </div>
-                <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
-                  $ shipper plan api --profile=production
-                </div>
-                <div className="mt-1" style={{ color: "#4ade80" }}>
-                  + Create site api.example.com
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Configure SSL (Let&apos;s Encrypt)
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Link database shipper_api_prod
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Deploy from main branch
-                </div>
-                <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
-                  $ shipper apply api --profile=production
-                </div>
-                <div className="mt-3" style={{ color: "var(--accent)" }}>
-                  ✓ All resources applied successfully
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section
-          className="border-t"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <div className="max-w-6xl mx-auto px-6 py-20">
-            <h2
-              className="text-3xl font-bold text-center mb-12"
-              style={{ color: "var(--foreground)" }}
-            >
-              Everything you need to ship
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "Provider Agnostic",
-                  desc: "Ploi, Forge, and more. One config, any provider.",
-                },
-                {
-                  title: "Plan & Apply",
-                  desc: "Preview changes before deploying. No surprises.",
-                },
-                {
-                  title: "Database Lifecycle",
-                  desc: "Create, link, and manage databases automatically.",
-                },
-                {
-                  title: "PR Previews",
-                  desc: "Spin up preview environments for every pull request.",
-                },
-                {
-                  title: "GitHub Actions",
-                  desc: "CI/CD out of the box. Deploy on push or PR.",
-                },
-                {
-                  title: "Config Validation",
-                  desc: "Catch misconfigurations before they hit production.",
-                },
-              ].map((f) => (
-                <div
-                  key={f.title}
-                  className="backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5"
-                  style={{
-                    background: "var(--surface)",
-                    borderColor: "var(--border)",
-                  }}
-                >
-                  <h3 className="font-semibold mb-3" style={{ color: "var(--foreground)" }}>
-                    {f.title}
-                  </h3>
-                  <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                    {f.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+      <section className="section-padding" style={{ position: "relative", zIndex: 1 }}>
+        <div className="max-width text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to ship?</h2>
+          <p className="text-lg mb-10" style={{ color: "var(--text-secondary)" }}>Get started in under 5 minutes</p>
+          <code
+            style={{
+              display: "inline-block",
+              padding: "16px 32px",
+              borderRadius: "10px",
+              fontSize: "15px",
+              background: "var(--background-alt)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            $ composer global require shippercli/cli
+          </code>
+        </div>
+      </section>
 
-        <section
-          className="border-t"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <div className="max-w-6xl mx-auto px-6 py-20 text-center">
-            <h2 className="text-2xl font-semibold mb-6" style={{ color: "var(--foreground)" }}>
-              Ready to ship?
-            </h2>
-            <code
-              className="rounded-xl px-8 py-4 font-mono text-sm inline-block border"
-              style={{
-                background: "var(--surface)",
-                borderColor: "var(--border)",
-                color: "var(--text-secondary)",
-                boxShadow: "0 4px 16px rgba(122, 162, 255, 0.06)",
-              }}
-            >
-              $ composer global require shippercli/cli
-            </code>
+      <footer className="section-padding py-8" style={{ borderTop: "1px solid var(--border)", position: "relative", zIndex: 1 }}>
+        <div className="max-width flex flex-col md:flex-row items-center justify-between gap-4">
+          <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>© 2026 Shipper. Open source MIT.</p>
+          <div className="flex gap-6 text-sm" style={{ color: "var(--text-muted)" }}>
+            <a href="https://github.com/shippercli/cli" target="_blank" rel="noopener">GitHub</a>
+            <a href="/docs">Docs</a>
+            <a href="/specs">Specs</a>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </footer>
+    </main>
   );
 }
