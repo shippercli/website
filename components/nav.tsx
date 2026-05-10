@@ -21,7 +21,7 @@ export default function Nav({ active }: { active?: "docs" | "specs" }) {
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="https://raw.githubusercontent.com/shippercli/assets/main/logo-v2.png"
+              src="https://raw.githubusercontent.com/shippercli/assets/main/logo-transparent.svg"
               alt="Shipper"
               width={32}
               height={32}
