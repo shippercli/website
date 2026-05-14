@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "./nav.css";
 
-export default function Nav({ active }: { active?: "docs" | "specs" }) {
+export default function Nav({ active }: { active?: "docs" | "specs" | "providers" }) {
   const [open, setOpen] = useState(false);
 
   return (
