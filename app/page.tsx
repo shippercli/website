@@ -134,7 +134,7 @@ export default function Home() {
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Ploi, Forge, and more. One config, any provider.",
+                  desc: "Ploi, Forge, cPanel, and more. One config, any provider.",
                 },
                 {
                   title: "Plan & Apply",
@@ -185,6 +185,25 @@ export default function Home() {
             <h2 className="text-2xl font-semibold mb-6" style={{ color: "var(--foreground)" }}>
               Ready to ship?
             </h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <a
+                href="/docs"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all"
+                style={{ background: "var(--accent)", color: "white" }}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                Get Started
+              </a>
+              <a
+                href="/providers"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium border transition-all"
+                style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+              >
+                View Providers
+              </a>
+            </div>
             <code
               className="rounded-xl px-8 py-4 font-mono text-sm inline-block border"
               style={{

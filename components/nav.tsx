@@ -23,6 +23,7 @@ export default function Nav({ active }: { active?: "docs" | "specs" }) {
 
         <div className="hidden sm:flex items-center gap-6 text-sm">
           <Link href="/docs" style={{ color: active === "docs" ? "var(--accent)" : "var(--text-secondary)" }}>Docs</Link>
+          <Link href="/providers" style={{ color: active === "providers" ? "var(--accent)" : "var(--text-secondary)" }}>Providers</Link>
           <Link href="/specs" style={{ color: active === "specs" ? "var(--accent)" : "var(--text-secondary)" }}>Specs</Link>
           <Link href="/docs" className="nav-button">Get Started</Link>
         </div>
