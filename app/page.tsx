@@ -134,7 +134,7 @@ export default function Home() {
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Ploi, Forge, cPanel, and more. One config, any provider.",
+                  desc: "Ploi, Forge, EasyPanel, cPanel, and more. One config, any provider.",
                 },
                 {
                   title: "Plan & Apply",

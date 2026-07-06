@@ -1,5 +1,3 @@
-import Nav from "@/components/nav";
-
 const providers = [
   {
     name: "Ploi",
@@ -37,15 +35,25 @@ const providers = [
       username: "myuser",
       api_token: "${CPANEL_API_TOKEN}",
     },
-    install: "Already included in core Shipper",
+    install: "composer require shippercli/provider-cpanel",
+  },
+  {
+    name: "EasyPanel",
+    slug: "easypanel",
+    description: "Deploy PHP applications with Git integration and EasyPanel-managed services on self-hosted infrastructure.",
+    features: ["Git Source Management", "Application Deployment", "Database Management", "Domain Mapping", "SSL Certificates"],
+    config: {
+      provider: "easypanel",
+      url: "https://easypanel.example.com",
+      auth_token: "${EASYPANEL_AUTH_TOKEN}",
+    },
+    install: "composer require shippercli/provider-easypanel",
   },
 ];
 
 export default function ProvidersPage() {
   return (
     <div className="flex flex-col flex-1">
-      <Nav />
-
       <main className="flex-1 min-w-0">
         <div className="max-w-4xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold mb-4">Providers</h1>

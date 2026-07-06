@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { marked } from "marked";
+import { parseMarkdownToHtml } from "@/lib/markdown";
 
 const SPECS_PATH = path.join(process.cwd(), "spec");
 
@@ -14,11 +14,6 @@ function extractTitle(content: string): string {
   const match = content.match(/^#\s+(.+)$/m);
   return match ? match[1] : "Untitled";
 }
-
-marked.setOptions({
-  gfm: true,
-  breaks: false,
-});
 
 export function getAllSpecs(): SpecPage[] {
   if (!fs.existsSync(SPECS_PATH)) return [];
@@ -37,7 +32,7 @@ export function getSpec(slug: string): SpecPage | null {
   const filePath = path.join(SPECS_PATH, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
   const content = fs.readFileSync(filePath, "utf-8");
-  const htmlContent = marked.parse(content) as string;
+  const htmlContent = parseMarkdownToHtml(content, "/specs");
   return { slug, title: extractTitle(content), content: htmlContent };
 }
 
