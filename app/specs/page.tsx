@@ -11,7 +11,7 @@ export default function SpecsPage() {
     <KnowledgeIndex
       kind="specs"
       eyebrow="System Blueprints"
-      title="Specifications with stronger hierarchy and actual navigational weight"
+      title="Specifications for how Shipper works"
       description="Design notes, architectural decisions, and internal references laid out like a product handbook instead of a loose markdown archive."
       entries={specs}
       navigation={navigation}

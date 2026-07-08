@@ -126,7 +126,7 @@ body::before {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
   gap: 1.5rem;
-  align-items: stretch;
+  align-items: start;
   margin-bottom: 2rem;
 }
 
@@ -151,7 +151,7 @@ body::before {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .kb-eyebrow,
