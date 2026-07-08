@@ -1,3 +1,7 @@
+---
+description: "This guide explains how to use Shipper as a reusable GitHub Action in your workflows."
+---
+
 # Using Shipper as a GitHub Action
 
 This guide explains how to use Shipper as a reusable GitHub Action in your workflows.

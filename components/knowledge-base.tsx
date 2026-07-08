@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 type NavPage = {
   slug: string;
@@ -11,12 +10,8 @@ type NavSections = Record<string, NavPage[]>;
 type Entry = {
   slug: string;
   title: string;
-  content: string;
+  description: string;
 };
-
-function excerpt(content: string) {
-  return content.replace(/^#.*$/gm, "").replace(/\n+/g, " ").trim().slice(0, 150);
-}
 
 export function KnowledgeIndex({
   kind,
@@ -25,6 +20,7 @@ export function KnowledgeIndex({
   description,
   entries,
   navigation,
+  startSlug,
 }: {
   kind: "docs" | "specs";
   title: string;
@@ -32,6 +28,7 @@ export function KnowledgeIndex({
   description: string;
   entries: Entry[];
   navigation: NavSections;
+  startSlug?: string;
 }) {
   const sectionNames = Object.keys(navigation);
   const entryCount = entries.length;
@@ -45,7 +42,7 @@ export function KnowledgeIndex({
             <h1 className="kb-title">{title}</h1>
             <p className="kb-description">{description}</p>
             <div className="kb-hero-actions">
-              <Link href={`/${kind}/${entries[0]?.slug ?? ""}`} className="kb-primary-action">
+              <Link href={`/${kind}/${startSlug ?? entries[0]?.slug ?? ""}`} className="kb-primary-action">
                 Start reading
               </Link>
               <div className="kb-meta-strip">
@@ -76,7 +73,7 @@ export function KnowledgeIndex({
                 <span className="kb-card-kind">{kind === "docs" ? "Guide" : "Spec"}</span>
               </div>
               <h2 className="kb-card-title">{entry.title}</h2>
-              <p className="kb-card-copy">{excerpt(entry.content)}...</p>
+              <p className="kb-card-copy">{entry.description}</p>
               <div className="kb-card-link">Open page</div>
             </Link>
           ))}

@@ -30,8 +30,21 @@ export default function ProvidersPage() {
                       className="h-10 w-auto object-contain object-left"
                     />
                   </div>
-                  <h2 className="text-2xl font-bold mb-2">{provider.name}</h2>
+                  <div className="mb-2 flex items-center gap-3">
+                    <h2 className="text-2xl font-bold">{provider.name}</h2>
+                    {provider.status === "beta" ? (
+                      <span
+                        className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wider"
+                        style={{ background: "rgba(29, 76, 127, 0.12)", color: "var(--accent)" }}
+                      >
+                        Beta
+                      </span>
+                    ) : null}
+                  </div>
                   <p className="text-[var(--text-secondary)]">{provider.description}</p>
+                  {provider.statusNote ? (
+                    <p className="mt-2 text-sm text-[var(--text-muted)]">{provider.statusNote}</p>
+                  ) : null}
                 </div>
                 <div className="text-sm font-medium text-[var(--accent)]">View provider details</div>
               </Link>

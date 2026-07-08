@@ -1,3 +1,7 @@
+---
+description: "**Issue:** MAR-40 **Date:** 2026-04-24 **Status:** In Review"
+---
+
 # Spec: GitHub Actions Integration
 
 **Issue:** MAR-40

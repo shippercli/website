@@ -1,3 +1,7 @@
+---
+description: "This guide explains how Shipper manages databases for your applications."
+---
+
 # Database Management Guide
 
 This guide explains how Shipper manages databases for your applications.

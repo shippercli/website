@@ -1,3 +1,7 @@
+---
+description: "This guide explains how to set up and use PR preview deployments with Shipper."
+---
+
 # PR Preview Deployments Guide
 
 This guide explains how to set up and use PR preview deployments with Shipper.

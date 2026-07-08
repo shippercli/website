@@ -1,3 +1,7 @@
+---
+description: "Welcome to the Shipper documentation! This comprehensive guide covers everything you need to know about deploying applications with Shipper."
+---
+
 # Shipper Documentation
 
 Welcome to the Shipper documentation! This comprehensive guide covers everything you need to know about deploying applications with Shipper.

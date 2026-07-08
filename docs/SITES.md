@@ -1,3 +1,7 @@
+---
+description: "This guide explains how Shipper manages sites and their lifecycle."
+---
+
 # Sites Management Guide
 
 This guide explains how Shipper manages sites and their lifecycle.

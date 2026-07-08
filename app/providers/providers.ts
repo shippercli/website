@@ -3,6 +3,8 @@ export const providers = [
     name: "Ploi",
     slug: "ploi",
     logo: "/providers/ploi.png",
+    status: "beta",
+    statusNote: "Follows the Ploi API structure, but has not been fully tested yet.",
     description:
       "Manage servers and deployments through the Ploi API. Ideal for developers who want a managed server control panel with a clean UI.",
     features: [
@@ -78,6 +80,10 @@ export const providers = [
     install: "composer require shippercli/provider-easypanel",
   },
 ] as const;
+
+export const allProviderFeatures = Array.from(
+  new Set(providers.flatMap((provider) => provider.features))
+).sort();
 
 export function getProvider(slug: string) {
   return providers.find((provider) => provider.slug === slug);

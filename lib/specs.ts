@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { parseContentMetadata } from "@/lib/content-metadata";
 import { parseMarkdownToHtml } from "@/lib/markdown";
 
 const SPECS_PATH = path.join(process.cwd(), "spec");
@@ -7,7 +8,22 @@ const SPECS_PATH = path.join(process.cwd(), "spec");
 export interface SpecPage {
   slug: string;
   title: string;
+  description: string;
   content: string;
+}
+
+function slugFromFilename(file: string): string {
+  return file.replace(/\.md$/i, "").toLowerCase();
+}
+
+function findSpecFile(slug: string): string | null {
+  if (!fs.existsSync(SPECS_PATH)) return null;
+  const normalizedSlug = slug.toLowerCase();
+  const file = fs
+    .readdirSync(SPECS_PATH)
+    .find((entry) => entry.endsWith(".md") && slugFromFilename(entry) === normalizedSlug);
+
+  return file ?? null;
 }
 
 function extractTitle(content: string): string {
@@ -21,19 +37,32 @@ export function getAllSpecs(): SpecPage[] {
     .readdirSync(SPECS_PATH)
     .filter((f) => f.endsWith(".md"))
     .map((file) => {
-      const slug = file.replace(/\.md$/, "");
+      const slug = slugFromFilename(file);
       const content = fs.readFileSync(path.join(SPECS_PATH, file), "utf-8");
-      return { slug, title: extractTitle(content), content };
+      const { metadata, body } = parseContentMetadata(content);
+      return {
+        slug,
+        title: extractTitle(body),
+        description: metadata.description ?? "",
+        content: body,
+      };
     })
     .sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
 export function getSpec(slug: string): SpecPage | null {
-  const filePath = path.join(SPECS_PATH, `${slug}.md`);
-  if (!fs.existsSync(filePath)) return null;
+  const file = findSpecFile(slug);
+  if (!file) return null;
+  const filePath = path.join(SPECS_PATH, file);
   const content = fs.readFileSync(filePath, "utf-8");
-  const htmlContent = parseMarkdownToHtml(content, "/specs");
-  return { slug, title: extractTitle(content), content: htmlContent };
+  const { metadata, body } = parseContentMetadata(content);
+  const htmlContent = parseMarkdownToHtml(body, "/specs");
+  return {
+    slug: slug.toLowerCase(),
+    title: extractTitle(body),
+    description: metadata.description ?? "",
+    content: htmlContent,
+  };
 }
 
 export function getSpecsNavigation(): Record<string, { slug: string; title: string }[]> {

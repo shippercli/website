@@ -1,3 +1,7 @@
+---
+description: "Install Shipper via Composer:"
+---
+
 # Getting Started
 
 ## Installation

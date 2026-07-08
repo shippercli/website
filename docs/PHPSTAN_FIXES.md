@@ -1,3 +1,7 @@
+---
+description: "This document describes the PHPStan configuration issues that were resolved."
+---
+
 # PHPStan Configuration Fixes
 
 This document describes the PHPStan configuration issues that were resolved.

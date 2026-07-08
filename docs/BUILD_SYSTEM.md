@@ -1,3 +1,7 @@
+---
+description: "This document explains the complete build and distribution system for the Shipper CLI."
+---
+
 # Shipper CLI Build and Distribution
 
 This document explains the complete build and distribution system for the Shipper CLI.

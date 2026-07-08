@@ -1,3 +1,7 @@
+---
+description: "This guide explains how to configure Shipper for your deployments using the shipper.yml file."
+---
+
 # Shipper Configuration Guide
 
 This guide explains how to configure Shipper for your deployments using the `shipper.yml` file.
@@ -5,7 +9,7 @@ This guide explains how to configure Shipper for your deployments using the `shi
 ## Overview
 
 Shipper uses a declarative YAML configuration file (`shipper.yml`) that should be placed in the root of your repository. This file defines:
-- Provider credentials and settings
+- Provider references and settings
 - Projects to deploy
 - Deployment profiles (production, staging, preview)
 - Site and database configurations
@@ -15,7 +19,7 @@ Shipper uses a declarative YAML configuration file (`shipper.yml`) that should b
 ```yaml
 providers:
   <provider_name>:
-    # Provider-specific configuration
+    # Provider-specific credentials and settings
     
 projects:
   <project_name>:
@@ -27,36 +31,27 @@ projects:
 
 ## Provider Configuration
 
-### Ploi Provider
-
-Currently, Shipper supports Ploi as a deployment provider.
+The `providers` section contains the credentials and settings for the deployment providers your projects use.
 
 ```yaml
 providers:
-  ploi:
-    api_key: "${PLOI_API_KEY}"
-    api_url: "https://ploi.io/api"
-    server_id: "105556"
-    deployment_timeout: 60
+  my-provider:
+    # provider-specific values go here
 ```
 
-**Configuration Options:**
+General rules:
 
-- `api_key` (required): Your Ploi API key. Use environment variables for security (e.g., `${PLOI_API_KEY}`)
-- `api_url` (required): Ploi API endpoint URL (default: `https://ploi.io/api`)
-- `server_id` (required): The ID of your Ploi server where sites will be deployed
-- `deployment_timeout` (optional): Maximum time in seconds to wait for deployment completion (default: 60)
+- each provider gets its own key under `providers`
+- projects reference a provider by name
+- secrets should be supplied through environment variables
+- provider-specific keys and capabilities vary by provider
 
-**Getting Your Ploi API Key:**
-1. Log in to your Ploi account
-2. Navigate to Settings → API
-3. Generate a new API token
-4. Store it as a secret in your GitHub repository or environment
+Provider-specific configuration belongs on the provider pages:
 
-**Finding Your Server ID:**
-1. Log in to Ploi
-2. Navigate to your server
-3. The server ID is in the URL: `https://ploi.io/servers/{server_id}`
+- [Ploi](/providers/ploi)
+- [Laravel Forge](/providers/forge)
+- [cPanel](/providers/cpanel)
+- [EasyPanel](/providers/easypanel)
 
 ## Project Configuration
 
@@ -65,7 +60,7 @@ Each project represents an application you want to deploy.
 ```yaml
 projects:
   api:
-    provider: ploi
+    provider: my-provider
     path: ./examples/api
     repository:
       provider: github
@@ -91,7 +86,7 @@ projects:
 
 **Project Options:**
 
-- `provider` (required): Which provider to use (e.g., `ploi`)
+- `provider` (required): Which configured provider to use from the `providers` section
 - `path` (required): Path to the project directory relative to repository root
 - `repository` (required): Repository configuration
   - `provider`: Git provider (`github`, `gitlab`, `bitbucket`, or `custom`)
@@ -188,7 +183,7 @@ Shipper supports environment variable interpolation throughout the configuration
 
 **Common Variables:**
 
-- `${PLOI_API_KEY}`: Ploi API key (required)
+- provider secrets such as `${PLOI_API_KEY}`, `${FORGE_API_TOKEN}`, `${CPANEL_API_TOKEN}`, or `${EASYPANEL_AUTH_TOKEN}`
 - `${GITHUB_HEAD_REF}`: PR branch name (for preview deployments)
 - `${GITHUB_PR_NUMBER}`: PR number (for preview deployments)
 - `${PROJECT_NAME}`: Project name (automatically available)
@@ -198,14 +193,14 @@ Shipper supports environment variable interpolation throughout the configuration
 
 **Locally:**
 ```bash
-export PLOI_API_KEY="your-api-key"
+export PROVIDER_SECRET="your-provider-secret"
 ./shipper apply api --profile=production
 ```
 
 **In GitHub Actions:**
 ```yaml
 env:
-  PLOI_API_KEY: ${{ secrets.PLOI_API_KEY }}
+  PROVIDER_SECRET: ${{ secrets.PROVIDER_SECRET }}
   GITHUB_HEAD_REF: ${{ github.head_ref }}
   GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
 ```
@@ -217,17 +212,14 @@ Here's a complete `shipper.yml` example:
 ```yaml
 # Provider configuration
 providers:
-  ploi:
-    api_key: "${PLOI_API_KEY}"
-    api_url: "https://ploi.io/api"
-    server_id: "105556"
-    deployment_timeout: 60
+  production-provider:
+    # See the provider page for exact keys
 
 # Projects
 projects:
   # Laravel API
   api:
-    provider: ploi
+    provider: production-provider
     path: ./api
     repository:
       provider: github
@@ -252,7 +244,7 @@ projects:
   
   # Frontend Application
   frontend:
-    provider: ploi
+    provider: production-provider
     path: ./frontend
     repository:
       provider: github
@@ -282,7 +274,7 @@ Always validate your configuration before deploying:
 This will check:
 - Configuration file syntax
 - Required fields are present
-- Provider credentials are accessible
+- Provider configuration is structurally valid
 - Variables can be resolved
 
 ## Best Practices
@@ -300,10 +292,10 @@ This will check:
 - **Solution**: Check that `shipper.yml` exists and has valid YAML syntax
 
 **Issue**: "Provider credentials invalid"
-- **Solution**: Verify `PLOI_API_KEY` environment variable is set correctly
+- **Solution**: Verify the required environment variables for your selected provider are set correctly
 
 **Issue**: "Server not found"
-- **Solution**: Check that `server_id` matches your Ploi server ID
+- **Solution**: Check the provider-specific configuration on the matching provider page and confirm your remote resource identifiers are correct
 
 **Issue**: "Domain already exists"
 - **Solution**: Domains must be unique. Check if the domain is already used by another site
@@ -313,6 +305,7 @@ This will check:
 
 ## Next Steps
 
+- [Providers](/providers) - Review provider-specific configuration, support status, and features
 - [PR Preview Deployments](./PR_PREVIEWS.md) - Learn how to set up PR preview environments
 - [Sites Management](./SITES.md) - Learn about site configuration and management
 - [Database Management](./DATABASES.md) - Deep dive into database features

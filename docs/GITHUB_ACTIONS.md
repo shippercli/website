@@ -1,3 +1,7 @@
+---
+description: "This guide explains how to set up automated deployments with GitHub Actions using Shipper."
+---
+
 # GitHub Actions Setup Guide
 
 This guide explains how to set up automated deployments with GitHub Actions using Shipper.

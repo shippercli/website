@@ -15,6 +15,7 @@ export default function DocsPage() {
       description="Installation, configuration, previews, and provider workflows organized like a deployment control room instead of a default markdown listing."
       entries={docs}
       navigation={navigation}
+      startSlug="getting-started"
     />
   );
 }

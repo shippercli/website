@@ -1,3 +1,7 @@
+---
+description: "This Laravel Zero application implements Nuno Maduro's strict Laravel coding standards and best practices. Every aspect of the codebase is designed with type safety, immutability, and code quality in mind."
+---
+
 # Strict Coding Standards Documentation
 
 ## Overview

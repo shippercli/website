@@ -18,7 +18,7 @@ function rewriteRelativeHref(href: string, base: DocSectionBase): string {
   if (!isParentLink && !isCurrentDirLink) return href;
 
   const [pathPart, hash = ""] = href.split("#", 2);
-  const sanitizedPath = pathPart.replace(/\.md$/i, "").replace(/^\.\.\/|^\.\//, "");
+  const sanitizedPath = pathPart.replace(/\.md$/i, "").replace(/^\.\.\/|^\.\//, "").toLowerCase();
 
   if (isParentLink && sanitizedPath === "README") return `/${hash ? `${hash.startsWith("#") ? "" : "#"}${hash}` : ""}` || "/";
   if (isParentLink && sanitizedPath === "ROADMAP") return "/";

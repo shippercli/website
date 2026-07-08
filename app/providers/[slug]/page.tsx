@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProvider, providers } from "../providers";
+import { allProviderFeatures, getProvider, providers } from "../providers";
 
 export const dynamic = "force-static";
 
@@ -26,6 +26,10 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
   const provider = getProvider(slug);
 
   if (!provider) notFound();
+
+  const unsupportedFeatures = allProviderFeatures.filter(
+    (feature) => !provider.features.includes(feature)
+  );
 
   return (
     <div className="flex flex-col flex-1">
@@ -52,22 +56,52 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
                   className="h-12 w-auto object-contain object-left"
                 />
               </div>
-              <h1 className="text-4xl font-bold mb-3">{provider.name}</h1>
+              <div className="mb-3 flex items-center gap-3">
+                <h1 className="text-4xl font-bold">{provider.name}</h1>
+                {provider.status === "beta" ? (
+                  <span
+                    className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider"
+                    style={{ background: "rgba(29, 76, 127, 0.12)", color: "var(--accent)" }}
+                  >
+                    Beta
+                  </span>
+                ) : null}
+              </div>
               <p className="text-lg text-[var(--text-secondary)] max-w-3xl">{provider.description}</p>
+              {provider.statusNote ? (
+                <p className="mt-3 text-sm text-[var(--text-muted)]">{provider.statusNote}</p>
+              ) : null}
             </div>
 
-            <div className="mb-8">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Features</h2>
-              <div className="flex flex-wrap gap-2">
-                {provider.features.map((feature) => (
-                  <span
-                    key={feature}
-                    className="px-3 py-1 text-sm rounded-full border border-[var(--border)]"
-                    style={{ background: "var(--surface-glass)" }}
-                  >
-                    {feature}
-                  </span>
-                ))}
+            <div className="mb-8 grid gap-6 md:grid-cols-2">
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Supported features</h2>
+                <div className="flex flex-wrap gap-2">
+                  {provider.features.map((feature) => (
+                    <span
+                      key={feature}
+                      className="px-3 py-1 text-sm rounded-full border border-[var(--border)]"
+                      style={{ background: "var(--surface-glass)" }}
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Not supported</h2>
+                <div className="flex flex-wrap gap-2">
+                  {unsupportedFeatures.map((feature) => (
+                    <span
+                      key={feature}
+                      className="px-3 py-1 text-sm rounded-full border border-[var(--border)] opacity-70"
+                      style={{ background: "rgba(255, 255, 255, 0.35)" }}
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
