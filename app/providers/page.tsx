@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { providers } from "./providers";
+import { getProviders } from "./providers";
 
-export default function ProvidersPage() {
+
+export default async function ProvidersPage() {
   return (
     <div className="flex flex-col flex-1">
       <main className="flex-1 min-w-0">
@@ -13,7 +14,7 @@ export default function ProvidersPage() {
           </p>
 
           <div className="space-y-12">
-            {providers.map((provider) => (
+            {(await getProviders()).map((provider) => (
               <Link
                 key={provider.slug}
                 href={`/providers/${provider.slug}`}

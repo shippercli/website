@@ -1,17 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { allProviderFeatures, getProvider, providers } from "../providers";
+import { getAllProviderFeatures, getProvider, getProviders } from "../providers";
 
 export const dynamic = "force-static";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const providers = await getProviders();
   return providers.map((provider) => ({ slug: provider.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const provider = getProvider(slug);
+  const provider = await getProvider(slug);
 
   if (!provider) return {};
 
@@ -23,10 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProviderDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const provider = getProvider(slug);
+  const provider = await getProvider(slug);
 
   if (!provider) notFound();
 
+  const allProviderFeatures = await getAllProviderFeatures();
   const unsupportedFeatures = allProviderFeatures.filter(
     (feature) => !provider.features.includes(feature)
   );

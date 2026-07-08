@@ -1,96 +1,67 @@
-export const providers = [
-  {
-    name: "Ploi",
-    slug: "ploi",
-    logo: "/providers/ploi-io-logo-user-crop.webp",
-    status: "beta",
-    statusNote: "Currently in early testing. Some features may not work as expected on all Ploi instances.",
-    description:
-      "Manage servers and deployments through the Ploi API. Ideal for developers who want a managed server control panel with a clean UI.",
-    features: [
-      "Site Management",
-      "SSL Certificates",
-      "Database Management",
-      "Queue Workers",
-      "Cron Jobs",
-      "Environment Variables",
-    ],
-    config: {
-      provider: "ploi",
-      api_key: "${PLOI_API_KEY}",
-      server_id: "123456",
-    },
-    install: "composer require shippercli/ploi-provider",
-  },
-  {
-    name: "Laravel Forge",
-    slug: "forge",
-    logo: "/providers/forge.svg",
-    status: "beta",
-    statusNote: "Currently in early testing. Some features may not work as expected on all Forge instances.",
-    description:
-      "Deploy to servers managed by Laravel Forge. Perfect for Laravel applications with built-in Composer, queue, and SSL support.",
-    features: [
-      "Site Management",
-      "SSL Certificates (Let's Encrypt)",
-      "Database Management",
-      "Queue Workers",
-      "Git Deployment",
-      "Daemon Commands",
-    ],
-    config: {
-      provider: "forge",
-      api_token: "${FORGE_API_TOKEN}",
-      server_id: "789012",
-    },
-    install: "composer global require laravel/forge-sdk",
-  },
-  {
-    name: "cPanel",
-    slug: "cpanel",
-    logo: "/providers/cpanel.svg",
-    status: "beta",
-    statusNote: "Currently in early testing. Some features may not work as expected on all cPanel instances.",
-    description:
-      "Automate deployments to shared cPanel hosting accounts. Works with any cPanel provider that gives you API access.",
-    features: ["Git Version Control", "Domain Management", "Database Management", "SSL Certificates"],
-    config: {
-      provider: "cpanel",
-      host: "cpanel.example.com",
-      port: 2083,
-      username: "myuser",
-      api_token: "${CPANEL_API_TOKEN}",
-    },
-    install: "composer require shippercli/provider-cpanel",
-  },
-  {
-    name: "EasyPanel",
-    slug: "easypanel",
-    logo: "/providers/easypanel.svg",
-    status: "beta",
-    statusNote: "Currently in early testing. Some features may not work as expected on all EasyPanel instances.",
-    description:
-      "Deploy applications across modern hosting environments with support for managed services.",
-    features: [
-      "Git Source Management",
-      "Application Deployment",
-      "Database Management",
-      "Domain Mapping",
-      "SSL Certificates",
-    ],
-    config: {
-      provider: "easypanel",
-      url: "https://easypanel.example.com",
-      auth_token: "${EASYPANEL_AUTH_TOKEN}",
-    },
-    install: "composer require shippercli/provider-easypanel",
-  },
-] as const;
+type ProviderMeta = {
+  name: string;
+  slug: string;
+  logo: string;
+  status?: "beta";
+  statusNote?: string;
+  description: string;
+  features: string[];
+  config: Record<string, unknown>;
+  install: string;
+};
 
-export const allProviderFeatures = Array.from(
-  new Set(providers.flatMap((provider) => provider.features))
-).sort();
+type ProviderSource = {
+  slug: string;
+  repo: string;
+};
 
-export function getProvider(slug: string) {
+export type Provider = ProviderMeta & {
+  logo: string;
+  repo: string;
+};
+
+const providerSources: ProviderSource[] = [
+  { slug: "ploi", repo: "shippercli/provider-ploi" },
+  { slug: "forge", repo: "shippercli/provider-forge" },
+  { slug: "cpanel", repo: "shippercli/provider-cpanel" },
+  { slug: "easypanel", repo: "shippercli/provider-easypanel" },
+];
+
+function rawGithubUrl(repo: string, path: string) {
+  return `https://raw.githubusercontent.com/${repo}/main/${path}`;
+}
+
+async function fetchProvider(source: ProviderSource): Promise<Provider> {
+  const response = await fetch(rawGithubUrl(source.repo, "meta.json"), {
+    cache: "force-cache",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to load provider metadata for ${source.slug}`);
+  }
+
+  const meta = (await response.json()) as ProviderMeta;
+
+  return {
+    ...meta,
+    logo: rawGithubUrl(source.repo, meta.logo),
+    repo: source.repo,
+  };
+}
+
+let providersPromise: Promise<Provider[]> | undefined;
+
+export async function getProviders() {
+  providersPromise ??= Promise.all(providerSources.map(fetchProvider));
+  return providersPromise;
+}
+
+export async function getAllProviderFeatures() {
+  const providers = await getProviders();
+  return Array.from(new Set(providers.flatMap((provider) => provider.features))).sort();
+}
+
+export async function getProvider(slug: string) {
+  const providers = await getProviders();
   return providers.find((provider) => provider.slug === slug);
 }
