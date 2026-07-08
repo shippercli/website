@@ -1,7 +1,10 @@
+import Image from "next/image";
+
 const providers = [
   {
     name: "Ploi",
     slug: "ploi",
+    logo: "/providers/ploi.png",
     description: "Manage servers and deployments through the Ploi API. Ideal for developers who want a managed server control panel with a clean UI.",
     features: ["Site Management", "SSL Certificates", "Database Management", "Queue Workers", "Cron Jobs", "Environment Variables"],
     config: {
@@ -14,6 +17,7 @@ const providers = [
   {
     name: "Laravel Forge",
     slug: "forge",
+    logo: "/providers/forge.svg",
     description: "Deploy to servers managed by Laravel Forge. Perfect for Laravel applications with built-in Composer, queue, and SSL support.",
     features: ["Site Management", "SSL Certificates (Let's Encrypt)", "Database Management", "Queue Workers", "Git Deployment", "Daemon Commands"],
     config: {
@@ -26,6 +30,7 @@ const providers = [
   {
     name: "cPanel",
     slug: "cpanel",
+    logo: "/providers/cpanel.svg",
     description: "Automate deployments to shared cPanel hosting accounts. Works with any cPanel provider that gives you API access.",
     features: ["Git Version Control", "Domain Management", "Database Management", "SSL Certificates"],
     config: {
@@ -40,6 +45,7 @@ const providers = [
   {
     name: "EasyPanel",
     slug: "easypanel",
+    logo: "/providers/easypanel.svg",
     description: "Deploy PHP applications with Git integration and EasyPanel-managed services on self-hosted infrastructure.",
     features: ["Git Source Management", "Application Deployment", "Database Management", "Domain Mapping", "SSL Certificates"],
     config: {
@@ -65,6 +71,15 @@ export default function ProvidersPage() {
             {providers.map((provider) => (
               <div key={provider.slug} className="border border-[var(--border)] rounded-2xl p-8 backdrop-blur-xl" style={{ background: "var(--surface)" }}>
                 <div className="mb-6">
+                  <div className="mb-4 flex h-14 items-center">
+                    <Image
+                      src={provider.logo}
+                      alt={`${provider.name} logo`}
+                      width={180}
+                      height={56}
+                      className="h-10 w-auto object-contain object-left"
+                    />
+                  </div>
                   <h2 className="text-2xl font-bold mb-2">{provider.name}</h2>
                   <p className="text-[var(--text-secondary)]">{provider.description}</p>
                 </div>
