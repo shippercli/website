@@ -22,10 +22,9 @@ export default function Nav({ active }: { active?: "docs" | "specs" | "providers
         </Link>
 
         <div className="hidden sm:flex items-center gap-6 text-sm">
-          <Link href="/docs" style={{ color: active === "docs" ? "var(--accent)" : "var(--text-secondary)" }}>Docs</Link>
           <Link href="/providers" style={{ color: active === "providers" ? "var(--accent)" : "var(--text-secondary)" }}>Providers</Link>
           <Link href="/specs" style={{ color: active === "specs" ? "var(--accent)" : "var(--text-secondary)" }}>Specs</Link>
-          <Link href="/docs" className="nav-button">Get Started</Link>
+          <Link href="/docs" className="nav-button">Documentation</Link>
         </div>
 
         <button
@@ -46,9 +45,8 @@ export default function Nav({ active }: { active?: "docs" | "specs" | "providers
       {open && (
         <div className="sm:hidden border-t" style={{ borderColor: "var(--border)" }}>
           <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
-            <Link href="/docs" style={{ color: "var(--text-secondary)" }}>Docs</Link>
             <Link href="/specs" style={{ color: "var(--text-secondary)" }}>Specs</Link>
-            <Link href="/docs" className="nav-button text-center">Get Started</Link>
+            <Link href="/docs" className="nav-button text-center">Documentation</Link>
           </div>
         </div>
       )}
