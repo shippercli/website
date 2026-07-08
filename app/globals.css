@@ -112,6 +112,104 @@ body::before {
   z-index: 1;
 }
 
+.marker-highlight {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.22rem;
+  margin: 0 -0.06rem;
+  color: inherit;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.marker-highlight::before {
+  content: "";
+  position: absolute;
+  left: -0.12rem;
+  right: -0.12rem;
+  top: 56%;
+  height: 0.95em;
+  transform: translateY(-50%) rotate(-1.25deg);
+  border-radius: 0.32rem;
+  opacity: 0.95;
+  z-index: -1;
+  filter: saturate(118%);
+  box-shadow: 0 1px 0 rgba(7, 26, 53, 0.04);
+}
+
+.marker-highlight-blue::before {
+  background: rgba(114, 167, 255, 0.56);
+}
+
+.marker-highlight-yellow::before {
+  background: rgba(255, 223, 104, 0.62);
+}
+
+.marker-highlight-green::before {
+  background: rgba(133, 227, 167, 0.56);
+}
+
+.marker-highlight-pink::before {
+  background: rgba(255, 176, 203, 0.56);
+}
+
+.marker-highlight-orange::before {
+  background: rgba(255, 190, 123, 0.58);
+}
+
+.marker-highlight-purple::before {
+  background: rgba(190, 166, 255, 0.58);
+}
+
+.marker-highlight::before {
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.marker-highlight:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) rotate(-1.25deg) scale(1.16);
+  filter: saturate(155%) brightness(1.12);
+}
+
+body:has(.marker-highlight-blue:hover) .marker-highlight-blue::before,
+body:has(.marker-highlight-yellow:hover) .marker-highlight-yellow::before,
+body:has(.marker-highlight-green:hover) .marker-highlight-green::before,
+body:has(.marker-highlight-pink:hover) .marker-highlight-pink::before,
+body:has(.marker-highlight-orange:hover) .marker-highlight-orange::before,
+body:has(.marker-highlight-purple:hover) .marker-highlight-purple::before {
+  opacity: 1;
+  transform: translateY(-50%) rotate(-1.25deg) scale(1.22);
+  filter: saturate(165%) brightness(1.16);
+}
+
+body:has(.marker-highlight-blue:hover) .marker-highlight-blue::before {
+  box-shadow: 0 0 0 2px rgba(114, 167, 255, 0.28), 0 0 42px rgba(114, 167, 255, 0.6), 0 0 78px rgba(114, 167, 255, 0.32);
+}
+
+body:has(.marker-highlight-yellow:hover) .marker-highlight-yellow::before {
+  box-shadow: 0 0 0 2px rgba(255, 223, 104, 0.3), 0 0 42px rgba(255, 223, 104, 0.64), 0 0 78px rgba(255, 223, 104, 0.34);
+}
+
+body:has(.marker-highlight-green:hover) .marker-highlight-green::before {
+  box-shadow: 0 0 0 2px rgba(133, 227, 167, 0.28), 0 0 42px rgba(133, 227, 167, 0.6), 0 0 78px rgba(133, 227, 167, 0.32);
+}
+
+body:has(.marker-highlight-pink:hover) .marker-highlight-pink::before {
+  box-shadow: 0 0 0 2px rgba(255, 176, 203, 0.28), 0 0 42px rgba(255, 176, 203, 0.6), 0 0 78px rgba(255, 176, 203, 0.32);
+}
+
+body:has(.marker-highlight-orange:hover) .marker-highlight-orange::before {
+  box-shadow: 0 0 0 2px rgba(255, 190, 123, 0.3), 0 0 42px rgba(255, 190, 123, 0.64), 0 0 78px rgba(255, 190, 123, 0.34);
+}
+
+body:has(.marker-highlight-purple:hover) .marker-highlight-purple::before {
+  box-shadow: 0 0 0 2px rgba(190, 166, 255, 0.28), 0 0 42px rgba(190, 166, 255, 0.62), 0 0 78px rgba(190, 166, 255, 0.34);
+}
+
 .kb-page {
   padding: 2rem 1.25rem 4rem;
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ProviderConfigRotator from "@/components/provider-config-rotator";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       </div>
 
       <main className="flex flex-1 w-full flex-col content-wrapper">
-        <section className="max-w-6xl mx-auto px-6 pt-24 pb-16 text-center">
+        <section className="max-w-7xl mx-auto px-6 pt-24 pb-16 text-center">
           <p
             className="text-sm font-semibold uppercase tracking-widest mb-6"
             style={{ color: "var(--accent)" }}
@@ -34,7 +35,7 @@ export default function Home() {
             review them, then apply.
           </p>
 
-          <div className="flex flex-col md:flex-row gap-6 max-w-5xl mx-auto text-left">
+          <div className="flex flex-col md:flex-row gap-6 max-w-7xl mx-auto text-left">
             <div
               className="flex-1 backdrop-blur-xl rounded-2xl p-8 border"
               style={{
@@ -43,39 +44,7 @@ export default function Home() {
                 boxShadow: "0 8px 32px rgba(122, 162, 255, 0.08)",
               }}
             >
-              <div className="font-mono text-sm">
-                <div className="mb-2" style={{ color: "var(--accent)" }}>
-                  shipper.yml
-                </div>
-                <div style={{ color: "var(--text-secondary)" }}>providers:</div>
-                <div className="ml-4" style={{ color: "var(--text-secondary)" }}>
-                  ploi:
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  server_id: &quot;105556&quot;
-                </div>
-                <div className="mt-3" style={{ color: "var(--text-secondary)" }}>
-                  projects:
-                </div>
-                <div className="ml-4" style={{ color: "var(--text-secondary)" }}>
-                  api:
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  provider: ploi
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  domain: &quot;api.example.com&quot;
-                </div>
-                <div className="ml-8" style={{ color: "var(--text-muted)" }}>
-                  profiles:
-                </div>
-                <div className="ml-12" style={{ color: "var(--text-muted)" }}>
-                  production:
-                </div>
-                <div className="ml-16" style={{ color: "var(--text-muted)" }}>
-                  branch: main
-                </div>
-              </div>
+              <ProviderConfigRotator />
             </div>
 
             <div
@@ -94,22 +63,22 @@ export default function Home() {
                   $ composer global require shippercli/cli
                 </div>
                 <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
-                  $ shipper plan api --profile=production
+                  $ shipper plan <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
                 <div className="mt-1" style={{ color: "#4ade80" }}>
-                  + Create site api.example.com
+                  + Create site <span className="marker-highlight marker-highlight-pink">api.example.com</span>
                 </div>
                 <div style={{ color: "#4ade80" }}>
                   + Configure SSL (Let&apos;s Encrypt)
                 </div>
                 <div style={{ color: "#4ade80" }}>
-                  + Link database shipper_api_prod
+                  + Link database <span className="marker-highlight marker-highlight-purple">myapp_production</span>
                 </div>
                 <div style={{ color: "#4ade80" }}>
-                  + Deploy from main branch
+                  + Deploy from <span className="marker-highlight marker-highlight-green">main</span> branch
                 </div>
                 <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
-                  $ shipper apply api --profile=production
+                  $ shipper apply <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
                 <div className="mt-3" style={{ color: "var(--accent)" }}>
                   ✓ All resources applied successfully

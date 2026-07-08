@@ -2,9 +2,9 @@ export const providers = [
   {
     name: "Ploi",
     slug: "ploi",
-    logo: "/providers/ploi.png",
+    logo: "/providers/ploi-io-logo-user-crop.webp",
     status: "beta",
-    statusNote: "Follows the Ploi API structure, but has not been fully tested yet.",
+    statusNote: "Currently in early testing. Some features may not work as expected on all Ploi instances.",
     description:
       "Manage servers and deployments through the Ploi API. Ideal for developers who want a managed server control panel with a clean UI.",
     features: [
@@ -26,6 +26,8 @@ export const providers = [
     name: "Laravel Forge",
     slug: "forge",
     logo: "/providers/forge.svg",
+    status: "beta",
+    statusNote: "Currently in early testing. Some features may not work as expected on all Forge instances.",
     description:
       "Deploy to servers managed by Laravel Forge. Perfect for Laravel applications with built-in Composer, queue, and SSL support.",
     features: [
@@ -47,6 +49,8 @@ export const providers = [
     name: "cPanel",
     slug: "cpanel",
     logo: "/providers/cpanel.svg",
+    status: "beta",
+    statusNote: "Currently in early testing. Some features may not work as expected on all cPanel instances.",
     description:
       "Automate deployments to shared cPanel hosting accounts. Works with any cPanel provider that gives you API access.",
     features: ["Git Version Control", "Domain Management", "Database Management", "SSL Certificates"],
@@ -63,6 +67,8 @@ export const providers = [
     name: "EasyPanel",
     slug: "easypanel",
     logo: "/providers/easypanel.svg",
+    status: "beta",
+    statusNote: "Currently in early testing. Some features may not work as expected on all EasyPanel instances.",
     description:
       "Deploy PHP applications with Git integration and EasyPanel-managed services on self-hosted infrastructure.",
     features: [
