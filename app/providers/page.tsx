@@ -1,61 +1,6 @@
 import Image from "next/image";
-
-const providers = [
-  {
-    name: "Ploi",
-    slug: "ploi",
-    logo: "/providers/ploi.png",
-    description: "Manage servers and deployments through the Ploi API. Ideal for developers who want a managed server control panel with a clean UI.",
-    features: ["Site Management", "SSL Certificates", "Database Management", "Queue Workers", "Cron Jobs", "Environment Variables"],
-    config: {
-      provider: "ploi",
-      api_key: "${PLOI_API_KEY}",
-      server_id: "123456",
-    },
-    install: "composer require shippercli/ploi-provider",
-  },
-  {
-    name: "Laravel Forge",
-    slug: "forge",
-    logo: "/providers/forge.svg",
-    description: "Deploy to servers managed by Laravel Forge. Perfect for Laravel applications with built-in Composer, queue, and SSL support.",
-    features: ["Site Management", "SSL Certificates (Let's Encrypt)", "Database Management", "Queue Workers", "Git Deployment", "Daemon Commands"],
-    config: {
-      provider: "forge",
-      api_token: "${FORGE_API_TOKEN}",
-      server_id: "789012",
-    },
-    install: "composer global require laravel/forge-sdk",
-  },
-  {
-    name: "cPanel",
-    slug: "cpanel",
-    logo: "/providers/cpanel.svg",
-    description: "Automate deployments to shared cPanel hosting accounts. Works with any cPanel provider that gives you API access.",
-    features: ["Git Version Control", "Domain Management", "Database Management", "SSL Certificates"],
-    config: {
-      provider: "cpanel",
-      host: "cpanel.example.com",
-      port: 2083,
-      username: "myuser",
-      api_token: "${CPANEL_API_TOKEN}",
-    },
-    install: "composer require shippercli/provider-cpanel",
-  },
-  {
-    name: "EasyPanel",
-    slug: "easypanel",
-    logo: "/providers/easypanel.svg",
-    description: "Deploy PHP applications with Git integration and EasyPanel-managed services on self-hosted infrastructure.",
-    features: ["Git Source Management", "Application Deployment", "Database Management", "Domain Mapping", "SSL Certificates"],
-    config: {
-      provider: "easypanel",
-      url: "https://easypanel.example.com",
-      auth_token: "${EASYPANEL_AUTH_TOKEN}",
-    },
-    install: "composer require shippercli/provider-easypanel",
-  },
-];
+import Link from "next/link";
+import { providers } from "./providers";
 
 export default function ProvidersPage() {
   return (
@@ -69,7 +14,12 @@ export default function ProvidersPage() {
 
           <div className="space-y-12">
             {providers.map((provider) => (
-              <div key={provider.slug} className="border border-[var(--border)] rounded-2xl p-8 backdrop-blur-xl" style={{ background: "var(--surface)" }}>
+              <Link
+                key={provider.slug}
+                href={`/providers/${provider.slug}`}
+                className="block border border-[var(--border)] rounded-2xl p-8 backdrop-blur-xl transition-transform duration-150 hover:-translate-y-0.5"
+                style={{ background: "var(--surface)" }}
+              >
                 <div className="mb-6">
                   <div className="mb-4 flex h-14 items-center">
                     <Image
@@ -83,38 +33,8 @@ export default function ProvidersPage() {
                   <h2 className="text-2xl font-bold mb-2">{provider.name}</h2>
                   <p className="text-[var(--text-secondary)]">{provider.description}</p>
                 </div>
-
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Features</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {provider.features.map((feature) => (
-                      <span
-                        key={feature}
-                        className="px-3 py-1 text-sm rounded-full border border-[var(--border)]"
-                        style={{ background: "var(--surface-glass)" }}
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Configuration</h3>
-                    <pre className="p-4 rounded-lg border border-[var(--border)] text-sm font-mono overflow-x-auto" style={{ background: "var(--surface-glass)" }}>
-                      <code>{JSON.stringify(provider.config, null, 2)}</code>
-                    </pre>
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Installation</h3>
-                    <pre className="p-4 rounded-lg border border-[var(--border)] text-sm font-mono overflow-x-auto" style={{ background: "var(--surface-glass)" }}>
-                      <code>{provider.install}</code>
-                    </pre>
-                  </div>
-                </div>
-              </div>
+                <div className="text-sm font-medium text-[var(--accent)]">View provider details</div>
+              </Link>
             ))}
           </div>
 
