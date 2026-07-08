@@ -70,7 +70,7 @@ export const providers = [
     status: "beta",
     statusNote: "Currently in early testing. Some features may not work as expected on all EasyPanel instances.",
     description:
-      "Deploy PHP applications with Git integration and EasyPanel-managed services on self-hosted infrastructure.",
+      "Deploy applications across modern hosting environments with support for managed services.",
     features: [
       "Git Source Management",
       "Application Deployment",
