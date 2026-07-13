@@ -10,6 +10,8 @@ export interface DocPage {
   title: string;
   description: string;
   content: string;
+  section: string;
+  order: number;
 }
 
 function slugFromFilename(file: string): string {
@@ -31,6 +33,17 @@ function extractTitle(content: string): string {
   return match ? match[1] : "Untitled";
 }
 
+function defaultSectionForSlug(slug: string): string {
+  if (slug === "getting-started") return "Getting Started";
+  if (slug === "configuration") return "Configuration";
+  if (slug === "sites" || slug === "server_lifecycle" || slug === "databases" || slug === "pr_previews") {
+    return "Deployment Features";
+  }
+  if (slug === "github_actions" || slug === "github_action") return "Automation";
+  if (slug === "build_system") return "Tooling";
+  return "Internal Notes";
+}
+
 export function getAllDocs(): DocPage[] {
   if (!fs.existsSync(DOCS_PATH)) return [];
   return fs
@@ -45,9 +58,13 @@ export function getAllDocs(): DocPage[] {
         title: extractTitle(body),
         description: metadata.description ?? "",
         content: body,
+        section: metadata.section ?? defaultSectionForSlug(slug),
+        order: metadata.order ?? 999,
+        hidden: metadata.hidden ?? false,
       };
     })
-    .sort((a, b) => a.slug.localeCompare(b.slug));
+    .filter((doc) => !doc.hidden)
+    .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 }
 
 export function getDoc(slug: string): DocPage | null {
@@ -62,29 +79,18 @@ export function getDoc(slug: string): DocPage | null {
     title: extractTitle(body),
     description: metadata.description ?? "",
     content: htmlContent,
+    section: metadata.section ?? defaultSectionForSlug(slug.toLowerCase()),
+    order: metadata.order ?? 999,
   };
 }
 
 export function getDocsNavigation(): Record<string, { slug: string; title: string }[]> {
   const docs = getAllDocs();
-  const sections: Record<string, { slug: string; title: string }[]> = {
-    "Getting Started": [],
-    "Configuration": [],
-    "Deployment": [],
-    "Guides": [],
-    "Reference": [],
-  };
+  const sections: Record<string, { slug: string; title: string }[]> = {};
 
   docs.forEach((doc) => {
-    if (doc.slug === "getting-started") sections["Getting Started"].push({ slug: doc.slug, title: doc.title });
-    else if (doc.slug.startsWith("configuration") || doc.slug.startsWith("strict_standards")) sections["Configuration"].push({ slug: doc.slug, title: doc.title });
-    else if (doc.slug.startsWith("build_system") || doc.slug.startsWith("github_action") || doc.slug.startsWith("pr_previews") || doc.slug.startsWith("sites")) sections["Deployment"].push({ slug: doc.slug, title: doc.title });
-    else if (doc.slug.startsWith("databases") || doc.slug.startsWith("phpstan_fixes")) sections["Guides"].push({ slug: doc.slug, title: doc.title });
-    else sections["Reference"].push({ slug: doc.slug, title: doc.title });
-  });
-
-  Object.keys(sections).forEach((k) => {
-    if (sections[k].length === 0) delete sections[k];
+    sections[doc.section] ??= [];
+    sections[doc.section].push({ slug: doc.slug, title: doc.title });
   });
 
   return sections;

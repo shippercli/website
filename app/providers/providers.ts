@@ -33,7 +33,7 @@ function rawGithubUrl(repo: string, path: string) {
 
 async function fetchProvider(source: ProviderSource): Promise<Provider> {
   const response = await fetch(rawGithubUrl(source.repo, "meta.json"), {
-    cache: "force-cache",
+    next: { revalidate: 300 },
   });
 
   if (!response.ok) {

@@ -14,6 +14,27 @@
   --border: rgba(120, 140, 180, 0.15);
   --surface: rgba(255, 255, 255, 0.8);
   --surface-glass: rgba(255, 255, 255, 0.6);
+  --surface-strong: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 248, 255, 0.92) 100%);
+  --footer-surface: rgba(255, 255, 255, 0.5);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --background: #09111d;
+  --background-alt: #0f1828;
+  --background-gradient-start: #09111d;
+  --background-gradient-end: #152238;
+  --foreground: #edf4ff;
+  --text-secondary: #b9c6db;
+  --text-muted: #8293ad;
+  --accent: #93b4ff;
+  --accent-hover: #a6c1ff;
+  --border: rgba(146, 169, 208, 0.18);
+  --surface: rgba(10, 18, 32, 0.8);
+  --surface-glass: rgba(19, 31, 52, 0.72);
+  --surface-strong: linear-gradient(180deg, rgba(20, 31, 51, 0.94) 0%, rgba(10, 19, 34, 0.94) 100%);
+  --footer-surface: rgba(10, 18, 32, 0.7);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -235,7 +256,7 @@ body:has(.marker-highlight-purple:hover) .marker-highlight-purple::before {
 .kb-card,
 .kb-pager-card {
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 248, 255, 0.92) 100%);
+  background: var(--surface-strong);
   box-shadow: 0 18px 60px rgba(7, 26, 53, 0.08);
 }
 

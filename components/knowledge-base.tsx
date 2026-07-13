@@ -11,6 +11,7 @@ type Entry = {
   slug: string;
   title: string;
   description: string;
+  label?: string;
 };
 
 export function KnowledgeIndex({
@@ -45,11 +46,11 @@ export function KnowledgeIndex({
               <Link href={`/${kind}/${startSlug ?? entries[0]?.slug ?? ""}`} className="kb-primary-action">
                 Start reading
               </Link>
-              <div className="kb-meta-strip">
-                <span>{entryCount} pages</span>
-                <span>{sectionNames.length} sections</span>
-                <span>{kind === "docs" ? "Operational guides" : "Internal design notes"}</span>
-              </div>
+            <div className="kb-meta-strip">
+              <span>{entryCount} pages</span>
+              <span>{sectionNames.length} sections</span>
+              <span>{kind === "docs" ? "Feature-by-feature reference" : "Internal design notes"}</span>
+            </div>
             </div>
           </div>
 
@@ -70,7 +71,7 @@ export function KnowledgeIndex({
             <Link key={entry.slug} href={`/${kind}/${entry.slug}`} className="kb-card">
               <div className="kb-card-topline">
                 <span className="kb-card-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="kb-card-kind">{kind === "docs" ? "Guide" : "Spec"}</span>
+                <span className="kb-card-kind">{entry.label ?? (kind === "docs" ? "Doc" : "Spec")}</span>
               </div>
               <h2 className="kb-card-title">{entry.title}</h2>
               <p className="kb-card-copy">{entry.description}</p>
@@ -87,6 +88,7 @@ export function KnowledgeArticle({
   kind,
   sectionLabel,
   title,
+  description,
   currentSlug,
   navigation,
   html,
@@ -96,6 +98,7 @@ export function KnowledgeArticle({
   kind: "docs" | "specs";
   sectionLabel: string;
   title: string;
+  description: string;
   currentSlug: string;
   navigation: NavSections;
   html: string;
@@ -111,7 +114,7 @@ export function KnowledgeArticle({
               <div className="kb-panel-label">{kind === "docs" ? "Documentation" : "Specifications"}</div>
               <p className="kb-sidebar-copy">
                 {kind === "docs"
-                  ? "Implementation guides, deployment flows, and operational setup."
+                  ? "Feature-by-feature reference for configuring and operating Shipper."
                   : "Architecture, standards, and design rationale for the product."}
               </p>
             </div>
@@ -145,11 +148,7 @@ export function KnowledgeArticle({
               <span>{sectionLabel}</span>
             </div>
             <h1 className="kb-article-title">{title}</h1>
-            <p className="kb-article-description">
-              {kind === "docs"
-                ? "Practical guidance for using Shipper in real deployment workflows."
-                : "Reference material for how the system is designed and expected to behave."}
-            </p>
+            <p className="kb-article-description">{description}</p>
           </header>
 
           <article className="kb-prose" dangerouslySetInnerHTML={{ __html: html }} />
