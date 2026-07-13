@@ -17,6 +17,7 @@ type ProviderSource = {
 
 export type Provider = ProviderMeta & {
   logo: string;
+  darkLogo?: string;
   repo: string;
 };
 
@@ -31,6 +32,24 @@ function rawGithubUrl(repo: string, path: string) {
   return `https://raw.githubusercontent.com/${repo}/main/${path}`;
 }
 
+function getThemeLogoOverride(slug: string): { lightLogo?: string; darkLogo?: string } {
+  if (slug === "forge") {
+    return {
+      lightLogo: "/providers/forge.svg",
+      darkLogo: "/providers/forge-dark.svg",
+    };
+  }
+
+  if (slug === "easypanel") {
+    return {
+      lightLogo: "/providers/easypanel.svg",
+      darkLogo: "/providers/easypanel-dark.svg",
+    };
+  }
+
+  return {};
+}
+
 async function fetchProvider(source: ProviderSource): Promise<Provider> {
   const response = await fetch(rawGithubUrl(source.repo, "meta.json"), {
     next: { revalidate: 300 },
@@ -41,10 +60,12 @@ async function fetchProvider(source: ProviderSource): Promise<Provider> {
   }
 
   const meta = (await response.json()) as ProviderMeta;
+  const themeOverride = getThemeLogoOverride(source.slug);
 
   return {
     ...meta,
-    logo: rawGithubUrl(source.repo, meta.logo),
+    logo: themeOverride.lightLogo ?? rawGithubUrl(source.repo, meta.logo),
+    darkLogo: themeOverride.darkLogo,
     repo: source.repo,
   };
 }

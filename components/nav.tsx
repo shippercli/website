@@ -12,14 +12,25 @@ export default function Nav({ active }: { active?: "docs" | "specs" | "providers
   return (
     <nav className="border-b" style={{ borderColor: "var(--border)" }}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
-        <Link href="/">
-          <Image
-            src="https://raw.githubusercontent.com/shippercli/assets/main/logo-transparent.svg"
-            alt="Shipper"
-            width={28}
-            height={28}
-            className="h-7 w-auto"
-          />
+        <Link href="/" className="flex items-center gap-3">
+          <div
+            className="flex h-8 w-8 items-center justify-center rounded-lg border"
+            style={{
+              borderColor: "var(--border)",
+              background: "var(--surface-glass)",
+            }}
+          >
+            <Image
+              src="/apple-icon.png"
+              alt="Shipper"
+              width={20}
+              height={20}
+              className="h-5 w-5"
+            />
+          </div>
+          <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--foreground)" }}>
+            Shipper
+          </span>
         </Link>
 
         <div className="hidden sm:flex items-center gap-6 text-sm">

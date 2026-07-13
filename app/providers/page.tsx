@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getProviders } from "./providers";
+import ProviderLogo from "@/components/provider-logo";
 
 
 export default async function ProvidersPage() {
@@ -23,8 +24,9 @@ export default async function ProvidersPage() {
               >
                 <div className="mb-6">
                   <div className="mb-4 flex h-14 items-center">
-                    <Image
-                      src={provider.logo}
+                    <ProviderLogo
+                      lightSrc={provider.logo}
+                      darkSrc={provider.darkLogo}
                       alt={`${provider.name} logo`}
                       width={180}
                       height={56}

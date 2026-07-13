@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllProviderFeatures, getProvider, getProviders } from "../providers";
+import ProviderLogo from "@/components/provider-logo";
 
 export const dynamic = "force-static";
 
@@ -50,8 +51,9 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
           >
             <div className="mb-8">
               <div className="mb-5 flex h-16 items-center">
-                <Image
-                  src={provider.logo}
+                <ProviderLogo
+                  lightSrc={provider.logo}
+                  darkSrc={provider.darkLogo}
                   alt={`${provider.name} logo`}
                   width={220}
                   height={64}
