@@ -36,6 +36,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
       kind="docs"
       sectionLabel={currentSection}
       title={doc.title}
+      description={doc.description}
       currentSlug={slug}
       navigation={navigation}
       html={doc.content.replace(/^#\s+(.+)$/m, "").trim()}

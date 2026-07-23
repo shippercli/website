@@ -2,6 +2,7 @@ type ProviderMeta = {
   name: string;
   slug: string;
   logo: string;
+  darkLogo?: string;
   status?: "beta";
   statusNote?: string;
   description: string;
@@ -17,6 +18,7 @@ type ProviderSource = {
 
 export type Provider = ProviderMeta & {
   logo: string;
+  darkLogo?: string;
   repo: string;
 };
 
@@ -33,7 +35,7 @@ function rawGithubUrl(repo: string, path: string) {
 
 async function fetchProvider(source: ProviderSource): Promise<Provider> {
   const response = await fetch(rawGithubUrl(source.repo, "meta.json"), {
-    cache: "force-cache",
+    next: { revalidate: 300 },
   });
 
   if (!response.ok) {
@@ -45,6 +47,7 @@ async function fetchProvider(source: ProviderSource): Promise<Provider> {
   return {
     ...meta,
     logo: rawGithubUrl(source.repo, meta.logo),
+    darkLogo: meta.darkLogo ? rawGithubUrl(source.repo, meta.darkLogo) : undefined,
     repo: source.repo,
   };
 }

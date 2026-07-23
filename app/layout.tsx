@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
@@ -26,6 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){try{var saved=localStorage.getItem("shipper-theme");var systemDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var theme=(saved==="dark"||saved==="light")?saved:(systemDark?"dark":"light");document.documentElement.dataset.theme=theme;document.documentElement.classList.toggle("dark",theme==="dark");}catch(e){}})();`}
+        </Script>
+      </head>
       <body className="min-h-full flex flex-col bg-white dark:bg-black text-foreground">
         <Nav />
         {children}

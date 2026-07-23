@@ -36,6 +36,7 @@ export default async function SpecPage({ params }: { params: Promise<{ slug: str
       kind="specs"
       sectionLabel={currentSection}
       title={spec.title}
+      description={spec.description}
       currentSlug={slug}
       navigation={navigation}
       html={spec.content.replace(/^#\s+(.+)$/m, "").trim()}

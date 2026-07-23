@@ -4,7 +4,7 @@ export default function Footer() {
       className="border-t py-10 backdrop-blur-md"
       style={{
         borderColor: "var(--border)",
-        background: "rgba(255, 255, 255, 0.5)",
+        background: "var(--footer-surface)",
       }}
     >
       <div className="max-w-6xl mx-auto px-6 text-center">

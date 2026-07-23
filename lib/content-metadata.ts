@@ -1,5 +1,8 @@
 export interface ContentMetadata {
   description?: string;
+  section?: string;
+  order?: number;
+  hidden?: boolean;
 }
 
 export function parseContentMetadata(content: string): {
@@ -23,9 +26,10 @@ export function parseContentMetadata(content: string): {
     const [, key, rawValue] = match;
     const value = rawValue.replace(/^"(.*)"$/, "$1").trim();
 
-    if (key === "description") {
-      metadata.description = value;
-    }
+    if (key === "description") metadata.description = value;
+    if (key === "section") metadata.section = value;
+    if (key === "order") metadata.order = Number.parseInt(value, 10);
+    if (key === "hidden") metadata.hidden = value === "true";
   }
 
   return { metadata, body };
