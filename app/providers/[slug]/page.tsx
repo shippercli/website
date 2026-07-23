@@ -1,8 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import ProviderDetailShell from "@/components/provider-detail-shell";
+import ProviderSupportTable from "@/components/provider-support-table";
 import { getAllProviderFeatures, getProvider, getProviders } from "../providers";
-import ProviderLogo from "@/components/provider-logo";
 
 export const dynamic = "force-static";
 
@@ -33,106 +32,51 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
   const unsupportedFeatures = allProviderFeatures.filter(
     (feature) => !provider.features.includes(feature)
   );
+  const featureRows = [
+    ...provider.features,
+    ...unsupportedFeatures,
+  ].sort((a, b) => a.localeCompare(b));
 
   return (
-    <div className="flex flex-col flex-1">
-      <main className="flex-1 min-w-0">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <div className="mb-6 text-sm text-[var(--text-muted)]">
-            <Link href="/providers" className="hover:text-[var(--foreground)] transition-colors">
-              Providers
-            </Link>{" "}
-            / {provider.name}
+    <ProviderDetailShell provider={provider} active="overview">
+      <div className="space-y-8">
+        <section>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
+            Compatibility matrix
+          </h2>
+          <ProviderSupportTable features={featureRows} supportedFeatures={provider.features} />
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <h3 className="mb-2 text-lg font-semibold">Documentation</h3>
+            <p className="mb-4 text-sm text-[var(--text-secondary)]">
+              Read provider-specific operating notes and rollout guidance.
+            </p>
+            <a href={`/providers/${provider.slug}/documentation`} className="text-sm font-medium text-[var(--accent)]">
+              Open documentation
+            </a>
           </div>
-
-          <div
-            className="border border-[var(--border)] rounded-3xl p-8 md:p-10 backdrop-blur-xl"
-            style={{ background: "var(--surface)" }}
-          >
-            <div className="mb-8">
-              <div className="mb-5 flex h-16 items-center">
-                <ProviderLogo
-                  lightSrc={provider.logo}
-                  darkSrc={provider.darkLogo}
-                  alt={`${provider.name} logo`}
-                  width={220}
-                  height={64}
-                  className="h-12 w-auto object-contain object-left"
-                />
-              </div>
-              <div className="mb-3 flex items-center gap-3">
-                <h1 className="text-4xl font-bold">{provider.name}</h1>
-                {provider.status === "beta" ? (
-                  <span
-                    className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider"
-                    style={{ background: "rgba(29, 76, 127, 0.12)", color: "var(--accent)" }}
-                  >
-                    Beta
-                  </span>
-                ) : null}
-              </div>
-              <p className="text-lg text-[var(--text-secondary)] max-w-3xl">{provider.description}</p>
-              {provider.statusNote ? (
-                <p className="mt-3 text-sm text-[var(--text-muted)]">{provider.statusNote}</p>
-              ) : null}
-            </div>
-
-            <div className="mb-8 grid gap-6 md:grid-cols-2">
-              <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Supported features</h2>
-                <div className="flex flex-wrap gap-2">
-                  {provider.features.map((feature) => (
-                    <span
-                      key={feature}
-                      className="px-3 py-1 text-sm rounded-full border border-[var(--border)]"
-                      style={{ background: "var(--surface-glass)" }}
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Not supported</h2>
-                <div className="flex flex-wrap gap-2">
-                  {unsupportedFeatures.map((feature) => (
-                    <span
-                      key={feature}
-                      className="px-3 py-1 text-sm rounded-full border border-[var(--border)] opacity-70"
-                      style={{ background: "rgba(255, 255, 255, 0.35)" }}
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Configuration</h2>
-                <pre
-                  className="p-4 rounded-lg border border-[var(--border)] text-sm font-mono overflow-x-auto"
-                  style={{ background: "var(--surface-glass)" }}
-                >
-                  <code>{JSON.stringify(provider.config, null, 2)}</code>
-                </pre>
-              </div>
-
-              <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">Installation</h2>
-                <pre
-                  className="p-4 rounded-lg border border-[var(--border)] text-sm font-mono overflow-x-auto"
-                  style={{ background: "var(--surface-glass)" }}
-                >
-                  <code>{provider.install}</code>
-                </pre>
-              </div>
-            </div>
+          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <h3 className="mb-2 text-lg font-semibold">Configuration</h3>
+            <p className="mb-4 text-sm text-[var(--text-secondary)]">
+              Review provider config keys and the expected configuration shape.
+            </p>
+            <a href={`/providers/${provider.slug}/configuration`} className="text-sm font-medium text-[var(--accent)]">
+              Open configuration
+            </a>
           </div>
-        </div>
-      </main>
-    </div>
+          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <h3 className="mb-2 text-lg font-semibold">Installation</h3>
+            <p className="mb-4 text-sm text-[var(--text-secondary)]">
+              See the package install command and rollout checklist for this provider.
+            </p>
+            <a href={`/providers/${provider.slug}/installation`} className="text-sm font-medium text-[var(--accent)]">
+              Open installation
+            </a>
+          </div>
+        </section>
+      </div>
+    </ProviderDetailShell>
   );
 }

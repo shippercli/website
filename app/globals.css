@@ -264,6 +264,14 @@ body:has(.marker-highlight-purple:hover) .marker-highlight-purple::before {
   display: none;
 }
 
+.site-logo-icon {
+  transition: filter 180ms ease;
+}
+
+:root[data-theme="dark"] .site-logo-icon {
+  filter: invert(1) brightness(1.15);
+}
+
 :root[data-theme="dark"] .provider-logo-light {
   display: none;
 }

@@ -25,7 +25,7 @@ export default function Nav({ active }: { active?: "docs" | "specs" | "providers
               alt="Shipper"
               width={20}
               height={20}
-              className="h-5 w-5"
+              className="site-logo-icon h-5 w-5"
             />
           </div>
           <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--foreground)" }}>
