@@ -39,7 +39,7 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
 
   return (
     <ProviderDetailShell provider={provider} active="overview">
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         <section>
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
             Compatibility matrix
@@ -48,7 +48,7 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
         </section>
 
         <section className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
             <h3 className="mb-2 text-lg font-semibold">Documentation</h3>
             <p className="mb-4 text-sm text-[var(--text-secondary)]">
               Read provider-specific operating notes and rollout guidance.
@@ -57,7 +57,7 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
               Open documentation
             </a>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
             <h3 className="mb-2 text-lg font-semibold">Configuration</h3>
             <p className="mb-4 text-sm text-[var(--text-secondary)]">
               Review provider config keys and the expected configuration shape.
@@ -66,7 +66,7 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
               Open configuration
             </a>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
             <h3 className="mb-2 text-lg font-semibold">Installation</h3>
             <p className="mb-4 text-sm text-[var(--text-secondary)]">
               See the package install command and rollout checklist for this provider.

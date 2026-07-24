@@ -33,12 +33,12 @@ export default async function ProviderDocumentationPage({
 
   return (
     <ProviderDetailShell provider={provider} active="documentation">
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         <section>
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
             Provider notes
           </h2>
-          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
             <p className="text-[var(--text-secondary)]">
               Use this provider when your infrastructure already runs through {provider.name}. Shipper
               keeps the deployment workflow consistent, while provider-specific capabilities and limits
@@ -52,14 +52,14 @@ export default async function ProviderDocumentationPage({
             Operational model
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
               <h3 className="mb-2 text-lg font-semibold">What Shipper handles</h3>
               <p className="text-sm text-[var(--text-secondary)]">
                 Environment-independent deployment orchestration, profile selection, and a consistent
                 project configuration surface across providers.
               </p>
             </div>
-            <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
               <h3 className="mb-2 text-lg font-semibold">What stays provider-specific</h3>
               <p className="text-sm text-[var(--text-secondary)]">
                 Authentication details, resource identifiers, available features, and behavior that can
@@ -73,7 +73,7 @@ export default async function ProviderDocumentationPage({
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
             Before using in production
           </h2>
-          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
             <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
               <li>Validate authentication and resource identifiers against a non-critical project first.</li>
               <li>Confirm every feature you plan to use on the overview page support matrix.</li>

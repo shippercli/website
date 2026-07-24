@@ -43,8 +43,8 @@ export default function ProviderDetailShell({
   return (
     <div className="flex flex-col flex-1">
       <main className="flex-1 min-w-0">
-        <div className="max-w-5xl mx-auto px-6 py-12">
-          <div className="mb-6 text-sm text-[var(--text-muted)]">
+        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+          <div className="mb-5 text-sm text-[var(--text-muted)] sm:mb-6">
             <Link href="/providers" className="hover:text-[var(--foreground)] transition-colors">
               Providers
             </Link>{" "}
@@ -52,22 +52,22 @@ export default function ProviderDetailShell({
           </div>
 
           <div
-            className="border border-[var(--border)] rounded-3xl p-8 md:p-10 backdrop-blur-xl"
+            className="rounded-[1.75rem] border border-[var(--border)] p-5 backdrop-blur-xl sm:rounded-3xl sm:p-8 md:p-10"
             style={{ background: "var(--surface)" }}
           >
-            <div className="mb-8">
-              <div className="mb-5 flex h-16 items-center">
+            <div className="mb-6 sm:mb-8">
+              <div className="mb-4 flex h-14 items-center sm:mb-5 sm:h-16">
                 <ProviderLogo
                   lightSrc={provider.logo}
                   darkSrc={provider.darkLogo}
                   alt={`${provider.name} logo`}
                   width={220}
                   height={64}
-                  className="h-12 w-auto object-contain object-left"
+                  className="h-10 w-auto max-w-full object-contain object-left sm:h-12"
                 />
               </div>
-              <div className="mb-3 flex flex-wrap items-center gap-3">
-                <h1 className="text-4xl font-bold">{provider.name}</h1>
+              <div className="mb-3 flex flex-wrap items-center gap-2 sm:gap-3">
+                <h1 className="text-3xl font-bold leading-none sm:text-4xl">{provider.name}</h1>
                 {provider.status === "beta" ? (
                   <span
                     className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider"
@@ -77,13 +77,13 @@ export default function ProviderDetailShell({
                   </span>
                 ) : null}
               </div>
-              <p className="text-lg text-[var(--text-secondary)] max-w-3xl">{provider.description}</p>
+              <p className="max-w-3xl text-base text-[var(--text-secondary)] sm:text-lg">{provider.description}</p>
               {provider.statusNote ? (
                 <p className="mt-3 text-sm text-[var(--text-muted)]">{provider.statusNote}</p>
               ) : null}
             </div>
 
-            <div className="mb-8 flex flex-wrap gap-2 border-b border-[var(--border)] pb-5">
+            <div className="-mx-1 mb-6 flex gap-2 overflow-x-auto border-b border-[var(--border)] px-1 pb-4 sm:mb-8 sm:flex-wrap sm:overflow-visible sm:pb-5">
               {navItems.map((item) => {
                 const isActive = item.key === active;
 
@@ -91,7 +91,7 @@ export default function ProviderDetailShell({
                   <Link
                     key={item.key}
                     href={item.href(provider.slug)}
-                    className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition-colors"
+                    className="inline-flex shrink-0 items-center rounded-full px-4 py-2 text-sm font-medium transition-colors"
                     style={{
                       background: isActive ? "var(--accent)" : "var(--surface-glass)",
                       color: isActive ? "white" : "var(--text-secondary)",

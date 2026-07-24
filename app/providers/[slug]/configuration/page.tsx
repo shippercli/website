@@ -33,13 +33,13 @@ export default async function ProviderConfigurationPage({
 
   return (
     <ProviderDetailShell provider={provider} active="configuration">
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         <section>
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
             Example configuration
           </h2>
           <pre
-            className="rounded-2xl border border-[var(--border)] p-5 text-sm overflow-x-auto"
+            className="overflow-x-auto rounded-2xl border border-[var(--border)] p-4 text-sm sm:p-5"
             style={{ background: "var(--surface-glass)" }}
           >
             <code>{JSON.stringify(provider.config, null, 2)}</code>
@@ -51,14 +51,14 @@ export default async function ProviderConfigurationPage({
             Configuration guidance
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
               <h3 className="mb-2 text-lg font-semibold">Provider block</h3>
               <p className="text-sm text-[var(--text-secondary)]">
                 Define credentials and connection settings in the provider block. Keep secrets outside version
                 control and inject them through environment variables where possible.
               </p>
             </div>
-            <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
               <h3 className="mb-2 text-lg font-semibold">Project mapping</h3>
               <p className="text-sm text-[var(--text-secondary)]">
                 Reference this provider from project profiles only after the provider-level credentials and

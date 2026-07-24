@@ -33,13 +33,13 @@ export default async function ProviderInstallationPage({
 
   return (
     <ProviderDetailShell provider={provider} active="installation">
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         <section>
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
             Install command
           </h2>
           <pre
-            className="rounded-2xl border border-[var(--border)] p-5 text-sm overflow-x-auto"
+            className="overflow-x-auto rounded-2xl border border-[var(--border)] p-4 text-sm sm:p-5"
             style={{ background: "var(--surface-glass)" }}
           >
             <code>{provider.install}</code>
@@ -50,7 +50,7 @@ export default async function ProviderInstallationPage({
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
             Rollout checklist
           </h2>
-          <div className="rounded-2xl border border-[var(--border)] p-6" style={{ background: "var(--surface-glass)" }}>
+          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
             <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
               <li>Install the provider package into the same project or runtime that executes Shipper.</li>
               <li>Configure credentials before the first deploy command.</li>
