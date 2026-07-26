@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!provider) return {};
 
   return {
-    title: `${provider.name} Documentation — Shipper`,
-    description: `Provider-specific documentation for ${provider.name}.`,
+    title: provider.name + " Documentation — Shipper",
+    description: "Provider-specific documentation for " + provider.name + ".",
   };
 }
 
@@ -33,13 +33,13 @@ export default async function ProviderDocumentationPage({
 
   return (
     <ProviderDetailShell provider={provider} active="documentation">
-      <div className="space-y-6 sm:space-y-8">
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            Provider notes
-          </h2>
-          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-            <p className="text-[var(--text-secondary)]">
+      <div className="provider-content-stack">
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div><span>Provider notes</span><h2>Operating {provider.name} through Shipper</h2></div>
+          </div>
+          <div className="provider-panel">
+            <p>
               Use this provider when your infrastructure already runs through {provider.name}. Shipper
               keeps the deployment workflow consistent, while provider-specific capabilities and limits
               still depend on what {provider.name} exposes on the target account or instance.
@@ -47,21 +47,21 @@ export default async function ProviderDocumentationPage({
           </div>
         </section>
 
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            Operational model
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-              <h3 className="mb-2 text-lg font-semibold">What Shipper handles</h3>
-              <p className="text-sm text-[var(--text-secondary)]">
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div><span>Operational model</span><h2>Keep the workflow consistent</h2></div>
+          </div>
+          <div className="provider-panel-grid">
+            <div className="provider-panel">
+              <h3>What Shipper handles</h3>
+              <p>
                 Environment-independent deployment orchestration, profile selection, and a consistent
                 project configuration surface across providers.
               </p>
             </div>
-            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-              <h3 className="mb-2 text-lg font-semibold">What stays provider-specific</h3>
-              <p className="text-sm text-[var(--text-secondary)]">
+            <div className="provider-panel">
+              <h3>What stays provider-specific</h3>
+              <p>
                 Authentication details, resource identifiers, available features, and behavior that can
                 differ between plans, regions, or instance setups.
               </p>
@@ -69,12 +69,12 @@ export default async function ProviderDocumentationPage({
           </div>
         </section>
 
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            Before using in production
-          </h2>
-          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-            <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div><span>Production gate</span><h2>Check the exact account first</h2></div>
+          </div>
+          <div className="provider-panel">
+            <ul className="provider-checklist">
               <li>Validate authentication and resource identifiers against a non-critical project first.</li>
               <li>Confirm every feature you plan to use on the overview page support matrix.</li>
               <li>Test deploy, rollback, and any provider-managed resources on the exact account type you run in production.</li>

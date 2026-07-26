@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!provider) return {};
 
   return {
-    title: `${provider.name} Provider — Shipper`,
+    title: provider.name + " Provider — Shipper",
     description: provider.description,
   };
 }
@@ -32,48 +32,49 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
   const unsupportedFeatures = allProviderFeatures.filter(
     (feature) => !provider.features.includes(feature)
   );
-  const featureRows = [
-    ...provider.features,
-    ...unsupportedFeatures,
-  ].sort((a, b) => a.localeCompare(b));
+  const featureRows = [...provider.features, ...unsupportedFeatures].sort((a, b) => a.localeCompare(b));
 
   return (
     <ProviderDetailShell provider={provider} active="overview">
-      <div className="space-y-6 sm:space-y-8">
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            Compatibility matrix
-          </h2>
+      <div className="provider-content-stack">
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div>
+              <span>Compatibility matrix</span>
+              <h2>What this integration can handle</h2>
+            </div>
+            <p>{featureRows.length} capabilities tracked</p>
+          </div>
           <ProviderSupportTable features={featureRows} supportedFeatures={provider.features} />
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-            <h3 className="mb-2 text-lg font-semibold">Documentation</h3>
-            <p className="mb-4 text-sm text-[var(--text-secondary)]">
-              Read provider-specific operating notes and rollout guidance.
-            </p>
-            <a href={`/providers/${provider.slug}/documentation`} className="text-sm font-medium text-[var(--accent)]">
-              Open documentation
-            </a>
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div>
+              <span>Provider manual</span>
+              <h2>Go deeper before you deploy</h2>
+            </div>
+            <p>Three focused references</p>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-            <h3 className="mb-2 text-lg font-semibold">Configuration</h3>
-            <p className="mb-4 text-sm text-[var(--text-secondary)]">
-              Review provider config keys and the expected configuration shape.
-            </p>
-            <a href={`/providers/${provider.slug}/configuration`} className="text-sm font-medium text-[var(--accent)]">
-              Open configuration
-            </a>
-          </div>
-          <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-            <h3 className="mb-2 text-lg font-semibold">Installation</h3>
-            <p className="mb-4 text-sm text-[var(--text-secondary)]">
-              See the package install command and rollout checklist for this provider.
-            </p>
-            <a href={`/providers/${provider.slug}/installation`} className="text-sm font-medium text-[var(--accent)]">
-              Open installation
-            </a>
+          <div className="provider-resource-grid">
+            <div className="provider-resource-card">
+              <span className="provider-resource-number">01</span>
+              <h3>Documentation</h3>
+              <p>Read provider-specific operating notes and rollout guidance.</p>
+              <a href={"/providers/" + provider.slug + "/documentation"}>Read notes <span aria-hidden="true">-&gt;</span></a>
+            </div>
+            <div className="provider-resource-card">
+              <span className="provider-resource-number">02</span>
+              <h3>Configuration</h3>
+              <p>Review provider config keys and the expected configuration shape.</p>
+              <a href={"/providers/" + provider.slug + "/configuration"}>View config <span aria-hidden="true">-&gt;</span></a>
+            </div>
+            <div className="provider-resource-card">
+              <span className="provider-resource-number">03</span>
+              <h3>Installation</h3>
+              <p>See the package install command and rollout checklist for this provider.</p>
+              <a href={"/providers/" + provider.slug + "/installation"}>See install <span aria-hidden="true">-&gt;</span></a>
+            </div>
           </div>
         </section>
       </div>

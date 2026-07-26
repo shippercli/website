@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!provider) return {};
 
   return {
-    title: `${provider.name} Configuration — Shipper`,
-    description: `Configuration reference for the ${provider.name} provider.`,
+    title: provider.name + " Configuration — Shipper",
+    description: "Configuration reference for the " + provider.name + " provider.",
   };
 }
 
@@ -33,34 +33,31 @@ export default async function ProviderConfigurationPage({
 
   return (
     <ProviderDetailShell provider={provider} active="configuration">
-      <div className="space-y-6 sm:space-y-8">
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            Example configuration
-          </h2>
-          <pre
-            className="overflow-x-auto rounded-2xl border border-[var(--border)] p-4 text-sm sm:p-5"
-            style={{ background: "var(--surface-glass)" }}
-          >
+      <div className="provider-content-stack">
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div><span>Example configuration</span><h2>The provider block</h2></div>
+          </div>
+          <pre className="provider-code-block">
             <code>{JSON.stringify(provider.config, null, 2)}</code>
           </pre>
         </section>
 
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            Configuration guidance
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-              <h3 className="mb-2 text-lg font-semibold">Provider block</h3>
-              <p className="text-sm text-[var(--text-secondary)]">
+        <section className="provider-content-section">
+          <div className="provider-section-heading">
+            <div><span>Configuration guidance</span><h2>What belongs where</h2></div>
+          </div>
+          <div className="provider-panel-grid">
+            <div className="provider-panel">
+              <h3>Provider block</h3>
+              <p>
                 Define credentials and connection settings in the provider block. Keep secrets outside version
                 control and inject them through environment variables where possible.
               </p>
             </div>
-            <div className="rounded-2xl border border-[var(--border)] p-5 sm:p-6" style={{ background: "var(--surface-glass)" }}>
-              <h3 className="mb-2 text-lg font-semibold">Project mapping</h3>
-              <p className="text-sm text-[var(--text-secondary)]">
+            <div className="provider-panel">
+              <h3>Project mapping</h3>
+              <p>
                 Reference this provider from project profiles only after the provider-level credentials and
                 provider-specific identifiers have been validated.
               </p>

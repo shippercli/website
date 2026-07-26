@@ -1,75 +1,72 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getProviders } from "./providers";
 import ProviderLogo from "@/components/provider-logo";
 
-
 export default async function ProvidersPage() {
+  const providers = await getProviders();
+  const betaCount = providers.filter((provider) => provider.status === "beta").length;
+
   return (
-    <div className="flex flex-col flex-1">
-      <main className="flex-1 min-w-0">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <h1 className="text-4xl font-bold mb-4">Providers</h1>
-          <p className="text-lg text-[var(--text-secondary)] mb-12">
-            Shipper supports multiple deployment providers. Choose the one that matches your infrastructure.
-          </p>
-
-          <div className="space-y-12">
-            {(await getProviders()).map((provider) => (
-              <Link
-                key={provider.slug}
-                href={`/providers/${provider.slug}`}
-                className="block border border-[var(--border)] rounded-2xl p-8 backdrop-blur-xl transition-transform duration-150 hover:-translate-y-0.5"
-                style={{ background: "var(--surface)" }}
-              >
-                <div className="mb-6">
-                  <div className="mb-4 flex h-14 items-center">
-                    <ProviderLogo
-                      lightSrc={provider.logo}
-                      darkSrc={provider.darkLogo}
-                      alt={`${provider.name} logo`}
-                      width={180}
-                      height={56}
-                      className="h-10 w-auto object-contain object-left"
-                    />
-                  </div>
-                  <div className="mb-2 flex items-center gap-3">
-                    <h2 className="text-2xl font-bold">{provider.name}</h2>
-                    {provider.status === "beta" ? (
-                      <span
-                        className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wider"
-                        style={{ background: "rgba(29, 76, 127, 0.12)", color: "var(--accent)" }}
-                      >
-                        Beta
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="text-[var(--text-secondary)]">{provider.description}</p>
-                  {provider.statusNote ? (
-                    <p className="mt-2 text-sm text-[var(--text-muted)]">{provider.statusNote}</p>
-                  ) : null}
-                </div>
-                <div className="text-sm font-medium text-[var(--accent)]">View provider details</div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="mt-12 p-6 border border-[var(--border)] rounded-2xl text-center backdrop-blur-xl" style={{ background: "var(--surface)" }}>
-            <h3 className="font-semibold mb-2">Missing your provider?</h3>
-            <p className="text-sm text-[var(--text-secondary)] mb-4">
-              Shipper has a plugin architecture. Adding new providers is straightforward.
+    <div className="provider-index-page">
+      <main className="provider-index-inner">
+        <header className="provider-index-header">
+          <div>
+            <div className="provider-index-eyebrow">Integration catalog</div>
+            <h1 className="provider-index-title">Choose the control plane behind your deploy.</h1>
+            <p className="provider-index-description">
+              One Shipper workflow, provider-specific capabilities. Compare what each integration can do before you connect an account.
             </p>
-            <a
-              href="https://github.com/shippercli/cli/issues/new"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-              style={{ background: "var(--accent)", color: "white" }}
-            >
-              Request a Provider
-            </a>
           </div>
+          <div className="provider-index-aside">
+            <span className="provider-index-aside-label">The catalog</span>
+            <div className="provider-index-stats">
+              <div><strong>{providers.length}</strong><span>providers</span></div>
+              <div><strong>{betaCount}</strong><span>in beta</span></div>
+            </div>
+          </div>
+        </header>
+
+        <div className="provider-index-list">
+          {providers.map((provider, index) => (
+            <Link
+              key={provider.slug}
+              href={"/providers/" + provider.slug}
+              className="provider-index-card"
+            >
+              <div className="provider-index-card-number">{String(index + 1).padStart(2, "0")}</div>
+              <div className="provider-index-card-main">
+                <div className="provider-index-card-logo">
+                  <ProviderLogo
+                    lightSrc={provider.logo}
+                    darkSrc={provider.darkLogo}
+                    alt={provider.name + " logo"}
+                    width={180}
+                    height={56}
+                    className="h-9 w-auto max-w-full object-contain object-left sm:h-10"
+                  />
+                </div>
+                <div className="provider-index-card-heading">
+                  <h2>{provider.name}</h2>
+                  {provider.status === "beta" ? <span className="provider-beta-badge">Beta</span> : null}
+                </div>
+                <p>{provider.description}</p>
+                {provider.statusNote ? <p className="provider-index-card-note">{provider.statusNote}</p> : null}
+              </div>
+              <div className="provider-index-card-action">View capabilities <span aria-hidden="true">-&gt;</span></div>
+            </Link>
+          ))}
         </div>
+
+        <section className="provider-request-card">
+          <div>
+            <span className="provider-request-label">Not seeing your infrastructure?</span>
+            <h2>Bring another provider into the workflow.</h2>
+            <p>Shipper uses a plugin architecture. Tell us which control plane should be next.</p>
+          </div>
+          <a href="https://github.com/shippercli/cli/issues/new" target="_blank" rel="noopener noreferrer">
+            Request a provider <span aria-hidden="true">-&gt;</span>
+          </a>
+        </section>
       </main>
     </div>
   );
