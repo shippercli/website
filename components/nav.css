@@ -11,3 +11,7 @@
 .nav-button:hover {
   background: var(--accent-hover);
 }
+
+.brand-cli {
+  color: var(--accent);
+}

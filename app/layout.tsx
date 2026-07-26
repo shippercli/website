@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shipper — Declarative Deployments for Laravel",
+  title: "Shipper CLI — Declarative Deployments for Laravel",
   description: "Provider-agnostic deployments from a single YAML file. Plan, review, apply.",
 };
 

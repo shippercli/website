@@ -29,7 +29,7 @@ export default function Nav({ active }: { active?: "docs" | "specs" | "providers
             />
           </div>
           <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--foreground)" }}>
-            Shipper
+            Shipper <span className="brand-cli">CLI</span>
           </span>
         </Link>
 
