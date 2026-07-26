@@ -26,7 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function(){try{var saved=localStorage.getItem("shipper-theme");var systemDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var theme=(saved==="dark"||saved==="light")?saved:(systemDark?"dark":"light");document.documentElement.dataset.theme=theme;document.documentElement.classList.toggle("dark",theme==="dark");}catch(e){}})();`}
