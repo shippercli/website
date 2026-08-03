@@ -48,6 +48,15 @@ Provider-specific fields and support levels are documented on provider pages:
 - [cPanel](/providers/cpanel)
 - [EasyPanel](/providers/easypanel)
 
+Provider pages are built from the provider package's `meta.json` file. The feature matrix combines the capabilities declared by the package metadata, so supported and unsupported features stay visible as integrations evolve. A `Beta` label means the provider follows the current API and configuration structure but is still in early testing; some features may not work on every account or provider instance.
+
+The provider packages currently tracked by the website are:
+
+- [Ploi](https://github.com/shippercli/provider-ploi)
+- [Laravel Forge](https://github.com/shippercli/provider-forge)
+- [cPanel](https://github.com/shippercli/provider-cpanel)
+- [EasyPanel](https://github.com/shippercli/provider-easypanel)
+
 ## Failure Modes
 
 - wrong credential variable names: match the provider page exactly
