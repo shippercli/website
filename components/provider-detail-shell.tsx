@@ -52,7 +52,7 @@ export default function ProviderDetailShell({
                   {provider.status === "beta" ? <span className="provider-beta-badge">Beta</span> : null}
                 </div>
                 <p>{provider.description}</p>
-                {provider.statusNote ? <p className="provider-detail-note">{provider.statusNote}</p> : null}
+                {provider.status === "beta" && provider.statusNote ? <p className="provider-detail-note">{provider.statusNote}</p> : null}
               </div>
             </div>
             <div className="provider-detail-meta" aria-label="Provider summary">

@@ -50,7 +50,7 @@ export default async function ProvidersPage() {
                   {provider.status === "beta" ? <span className="provider-beta-badge">Beta</span> : null}
                 </div>
                 <p>{provider.description}</p>
-                {provider.statusNote ? <p className="provider-index-card-note">{provider.statusNote}</p> : null}
+                {provider.status === "beta" && provider.statusNote ? <p className="provider-index-card-note">{provider.statusNote}</p> : null}
               </div>
               <div className="provider-index-card-action">View capabilities <span aria-hidden="true">-&gt;</span></div>
             </Link>
