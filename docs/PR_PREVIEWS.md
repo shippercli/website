@@ -21,15 +21,15 @@ This page explains how to run temporary pull request environments.
 projects:
   api:
     provider: hosting
+    databases:
+      main:
+        name: "myapp_preview_${GITHUB_PR_NUMBER}"
+        user: "myapp_preview_${GITHUB_PR_NUMBER}"
+        type: mysql
     profiles:
       preview:
         branch: "${GITHUB_HEAD_REF}"
         domain: "api-preview-${GITHUB_PR_NUMBER}.example.com"
-        databases:
-          main:
-            name: "myapp_preview_${GITHUB_PR_NUMBER}"
-            user: "myapp_preview_${GITHUB_PR_NUMBER}"
-            type: mysql
         infrastructure:
           server:
             mode: create

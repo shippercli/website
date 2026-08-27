@@ -13,13 +13,13 @@ This page explains how Shipper manages databases by environment.
 ```yaml
 projects:
   api:
+    databases:
+      main:
+        name: "myapp_production"
+        user: "myapp_production"
+        type: mysql
     profiles:
       production:
-        databases:
-          main:
-            name: "myapp_production"
-            user: "myapp_production"
-            type: mysql
 ```
 
 ## Fields
@@ -41,17 +41,17 @@ Database engine.
 ```yaml
 projects:
   api:
+    databases:
+      main:
+        name: "myapp_production"
+        user: "myapp_production"
+        type: mysql
+      cache:
+        name: "myapp_cache"
+        user: "myapp_cache"
+        type: mysql
     profiles:
       production:
-        databases:
-          main:
-            name: "myapp_production"
-            user: "myapp_production"
-            type: mysql
-          cache:
-            name: "myapp_cache"
-            user: "myapp_cache"
-            type: mysql
 ```
 
 ## Preview Pattern
@@ -68,4 +68,4 @@ Database creation and linking behavior vary by provider. Confirm support on the 
 
 - stable and preview environments sharing one database name: make preview naming unique
 - assuming a provider supports automated database lifecycle: confirm feature support first
-- placing databases at the wrong config level: keep them under the intended profile
+- placing databases at the wrong config level: keep them under the project, using profile variables for environment-specific names
