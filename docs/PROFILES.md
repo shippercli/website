@@ -33,9 +33,8 @@ The branch to deploy for the environment.
 
 The hostname for the environment.
 
-### `databases`
-
-Environment-specific database declarations.
+Database declarations belong at the project level under `projects.<name>.databases`.
+Use profile interpolation in database names when each environment needs distinct resources.
 
 ### `infrastructure`
 
@@ -47,6 +46,11 @@ Environment-specific infrastructure behavior such as server reuse or provisionin
 projects:
   api:
     provider: hosting
+    databases:
+      main:
+        name: "myapp_preview_${GITHUB_PR_NUMBER}"
+        user: "myapp_preview_${GITHUB_PR_NUMBER}"
+        type: mysql
     profiles:
       production:
         branch: main
@@ -55,11 +59,6 @@ projects:
       preview:
         branch: "${GITHUB_HEAD_REF}"
         domain: "api-preview-${GITHUB_PR_NUMBER}.example.com"
-        databases:
-          main:
-            name: "myapp_preview_${GITHUB_PR_NUMBER}"
-            user: "myapp_preview_${GITHUB_PR_NUMBER}"
-            type: mysql
         infrastructure:
           server:
             mode: create

@@ -11,14 +11,16 @@ This page explains how to automate Shipper from GitHub Actions.
 ## Reusable Shipper Action
 
 ```yaml
-- uses: ulties/shipper/.github/actions/shipper@v1.0.0
+- uses: shippercli/actions/.github/actions/shipper@c2c276e12f831ba2c3377a063d579fede5cc5ecc
   with:
     command: apply
     project: api
     profile: production
     force: true
+    providers: |
+      shippercli/provider-cpanel:^1.0
   env:
-    HOSTING_API_KEY: ${{ secrets.HOSTING_API_KEY }}
+    CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
 ```
 
 Supported inputs:
@@ -27,6 +29,9 @@ Supported inputs:
 - `project`
 - `profile`
 - `force`
+- `providers` (required)
+- `cli-version`
+- `php-version`
 
 Provider secrets vary by provider. Confirm the exact variable names on the provider page.
 
@@ -45,14 +50,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ulties/shipper/.github/actions/shipper@v1.0.0
+      - uses: shippercli/actions/.github/actions/shipper@c2c276e12f831ba2c3377a063d579fede5cc5ecc
         with:
           command: apply
           project: api
           profile: production
           force: true
+          providers: |
+            shippercli/provider-cpanel:^1.0
         env:
-          HOSTING_API_KEY: ${{ secrets.HOSTING_API_KEY }}
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
 ```
 
 ## Preview Workflow Example
@@ -69,14 +76,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ulties/shipper/.github/actions/shipper@v1.0.0
+      - uses: shippercli/actions/.github/actions/shipper@c2c276e12f831ba2c3377a063d579fede5cc5ecc
         with:
           command: apply
           project: api
           profile: preview
           force: true
+          providers: |
+            shippercli/provider-cpanel:^1.0
         env:
-          HOSTING_API_KEY: ${{ secrets.HOSTING_API_KEY }}
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
 ```
@@ -95,14 +104,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ulties/shipper/.github/actions/shipper@v1.0.0
+      - uses: shippercli/actions/.github/actions/shipper@c2c276e12f831ba2c3377a063d579fede5cc5ecc
         with:
           command: destroy
           project: api
           profile: preview
           force: true
+          providers: |
+            shippercli/provider-cpanel:^1.0
         env:
-          HOSTING_API_KEY: ${{ secrets.HOSTING_API_KEY }}
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
 ```
