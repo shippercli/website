@@ -18,6 +18,7 @@ scheduled jobs, certificates, and application logs through the Forge API v2
 client. Owned preview sites can be enumerated and removed by the core orphan
 cleanup flow. Deployment rollback, server lifecycle, and automatic cleanup of
 server-level databases remain outside this provider contract.
+The optional `ownership_tag` defaults to `shipper-managed`.
 
 | Component | Responsibility |
 |---|---|
@@ -33,9 +34,6 @@ The provider requires:
 - `api_token`
 - `organization_slug`
 - `server_id`
-
-The optional `ownership_tag` defaults to `shipper-managed`.
-
 ## Supported behavior
 
 1. Find a site by its configured domain on the selected server.
@@ -64,7 +62,6 @@ not emulate the removed API v1 operation.
 | Previews | Partial | Owned preview sites participate in orphan cleanup; database ownership is not exposed safely by Forge API v2. |
 
 ## Safety requirements
-
 - API v2 credentials and organization scope must be explicit.
 - A missing site ID or API exception fails the operation.
 - Destroy is idempotent for a missing site.
