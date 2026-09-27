@@ -4,6 +4,9 @@ description: "EasyPanel provider capability contract and ownership rules."
 
 # Spec: EasyPanel Provider
 
+**Date:** 2026-09-27
+**Status:** In Review
+
 ## Current implementation
 
 `shippercli/provider-easypanel` uses the EasyPanel API to manage an owned
@@ -25,7 +28,7 @@ service mounts.
 | Service mounts | Supported | Mounts are reconciled by index and removed with the owned service. |
 | Logs | Partial | Requires EasyPanel log aggregation. |
 | Rollback | Unsupported | No safe public rollback mutation is exposed. |
-| Previews | Supported | Profile-specific projects and domains use ownership-guarded explicit cleanup. |
+| Previews | Partial | Profile-specific projects and domains are supported, but automated preview cleanup is not implemented. |
 
 ## Safety requirements
 
