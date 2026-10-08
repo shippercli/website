@@ -27,6 +27,7 @@ const providerSources: ProviderSource[] = [
   { slug: "forge", repo: "shippercli/provider-forge" },
   { slug: "cpanel", repo: "shippercli/provider-cpanel" },
   { slug: "easypanel", repo: "shippercli/provider-easypanel" },
+  { slug: "coolify", repo: "shippercli/provider-coolify" },
 ];
 
 const featureAliases: Record<string, string> = {
