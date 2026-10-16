@@ -395,6 +395,8 @@ body:has(.marker-highlight-purple:hover) .marker-highlight-purple::before {
 }
 
 .kb-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
   border-radius: 1.5rem;
