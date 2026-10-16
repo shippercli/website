@@ -35,5 +35,8 @@ jobs:
       - name: Type-check
         run: npx tsc --noEmit
 
+      - name: Test theme preferences
+        run: npm test
+
       - name: Build production site
         run: npx next build

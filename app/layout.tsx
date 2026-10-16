@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import { themeInitializationScript } from "@/lib/theme.mjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,7 @@ export default function RootLayout({
     >
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var saved=localStorage.getItem("shipper-theme");var systemDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var theme=(saved==="dark"||saved==="light")?saved:(systemDark?"dark":"light");document.documentElement.dataset.theme=theme;document.documentElement.classList.toggle("dark",theme==="dark");}catch(e){}})();`}
+          {themeInitializationScript}
         </Script>
       </head>
       <body className="min-h-full flex flex-col bg-white dark:bg-black text-foreground">
