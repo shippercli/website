@@ -61,3 +61,11 @@ Deployed automatically to Vercel on push to main.
 ## License
 
 MIT
+### Repository Markdown rendering
+
+Imported Markdown is rendered with Marked, relative documentation links are
+rewritten, and the resulting HTML is sanitized before rendering. The allowlist
+preserves ordinary documentation structure, code language classes and images;
+it omits scripts, event attributes, embedded frames/forms and unsafe URL schemes.
+Raw repository HTML must not rely on executable content or arbitrary attributes.
+Regression coverage lives in `tests/markdown-links.test.mjs`.

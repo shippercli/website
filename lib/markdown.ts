@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 
 type DocSectionBase = "/docs" | "/specs";
 
@@ -38,5 +39,13 @@ function rewriteMarkdownLinks(html: string, base: DocSectionBase): string {
 
 export function parseMarkdownToHtml(content: string, base: DocSectionBase): string {
   const htmlContent = marked.parse(content) as string;
-  return rewriteMarkdownLinks(htmlContent, base);
+  return sanitizeHtml(rewriteMarkdownLinks(htmlContent, base), {
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img"],
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      code: ["class"],
+    },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
+    allowProtocolRelative: false,
+  });
 }
