@@ -57,10 +57,7 @@ export default function Home() {
             >
               <div className="font-mono text-sm">
                 <div className="mb-3" style={{ color: "#4ade80" }}>
-                  Terminal
-                </div>
-                <div className="mb-3 text-xs" style={{ color: "var(--text-secondary)" }}>
-                  Illustrative output; actions vary by provider and configuration.
+                  Example commands
                 </div>
                 <div style={{ color: "var(--text-secondary)" }}>
                   $ composer global require shippercli/cli
@@ -68,23 +65,14 @@ export default function Home() {
                 <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
                   $ shipper plan <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
-                <div className="mt-1" style={{ color: "#4ade80" }}>
-                  + Create site <span className="marker-highlight marker-highlight-pink">api.example.com</span>
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Configure SSL (Let&apos;s Encrypt)
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Database operation per provider <span className="marker-highlight marker-highlight-purple">myapp_production</span>
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Deploy from <span className="marker-highlight marker-highlight-green">main</span> branch
+                <div className="mt-1" style={{ color: "var(--text-secondary)" }}>
+                  Review provider-specific actions and any blocked reasons.
                 </div>
                 <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
                   $ shipper apply <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
                 <div className="mt-3" style={{ color: "var(--accent)" }}>
-                  ✓ Apply completed; verify provider-specific resources
+                  Applies changes supported by the selected provider.
                 </div>
               </div>
             </div>
@@ -106,27 +94,27 @@ export default function Home() {
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Use shared configuration across supported providers, with provider-specific capabilities.",
+                  desc: "Use one project config with supported providers. Available capabilities vary by provider.",
                 },
                 {
                   title: "Plan & Apply",
-                  desc: "Review the provider's plan before applying changes.",
+                  desc: "Review provider-specific actions and blockers before applying.",
                 },
                 {
                   title: "Database Lifecycle",
-                  desc: "Creation, reuse, credentials, and cleanup depend on the provider.",
+                  desc: "Creation, adoption, credential delivery, and cleanup depend on provider support.",
                 },
                 {
                   title: "PR Previews",
-                  desc: "Deploy previews through configured workflows; configure cleanup separately.",
+                  desc: "Deploy previews from configured workflows. Set up cleanup separately.",
                 },
                 {
                   title: "GitHub Actions",
-                  desc: "Use the GitHub Actions examples with your workflows and credentials.",
+                  desc: "Run Shipper from workflows you configure for deployment and cleanup.",
                 },
                 {
                   title: "Config Validation",
-                  desc: "Validate configuration before applying it.",
+                  desc: "Validate configuration before applying provider changes.",
                 },
               ].map((f) => (
                 <div

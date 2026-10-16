@@ -11,9 +11,9 @@ Marketing website and documentation for Shipper CLI.
 
 ## Stack
 
-- Next.js 15 App Router
-- TypeScript
-- Tailwind CSS
+- Next.js 16 App Router
+- React 19 and TypeScript
+- Tailwind CSS 4
 
 ## Development
 
