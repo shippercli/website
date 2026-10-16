@@ -37,6 +37,14 @@ class BuiltLinksTest(unittest.TestCase):
     def test_unresolved_markdown_link(self):
         self.check('<a href="DOCS.md">Missing</a>', 'unresolved relative link')
 
+    def test_provider_routes_have_bounded_revalidation(self):
+        manifest = {'routes': {'/providers': {'initialRevalidateSeconds': 300},
+                               '/providers/ploi': {'initialRevalidateSeconds': 300}}}
+        self.assertEqual(verifier.verify_provider_revalidation(manifest), 2)
+        manifest['routes']['/providers']['initialRevalidateSeconds'] = False
+        with self.assertRaisesRegex(RuntimeError, 'must revalidate'):
+            verifier.verify_provider_revalidation(manifest)
+
     def test_empty_build_is_not_success(self):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(RuntimeError, 'No production HTML'):

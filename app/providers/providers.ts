@@ -1,15 +1,19 @@
-type ProviderMeta = {
-  name: string;
-  slug: string;
-  logo: string;
-  darkLogo?: string;
-  status?: "beta";
-  statusNote?: string;
-  description: string;
-  features: string[];
-  config: Record<string, unknown>;
-  install: string;
-};
+import { z } from "zod";
+
+const providerMetaSchema = z.object({
+  name: z.string().min(1),
+  slug: z.string().min(1),
+  logo: z.string().min(1),
+  darkLogo: z.string().min(1).optional(),
+  status: z.literal("beta").optional(),
+  statusNote: z.string().optional(),
+  description: z.string().min(1),
+  features: z.array(z.string().min(1)),
+  config: z.record(z.string(), z.unknown()),
+  install: z.string().min(1),
+});
+
+type ProviderMeta = z.infer<typeof providerMetaSchema>;
 
 type ProviderSource = {
   slug: string;
@@ -59,7 +63,16 @@ async function fetchProvider(source: ProviderSource): Promise<Provider> {
     throw new Error(`Failed to load provider metadata for ${source.slug}`);
   }
 
-  const meta = (await response.json()) as ProviderMeta;
+  let meta: ProviderMeta;
+  try {
+    const result = providerMetaSchema.safeParse(await response.json());
+    if (!result.success || result.data.slug !== source.slug) {
+      throw new Error("Invalid metadata");
+    }
+    meta = result.data;
+  } catch {
+    throw new Error(`Invalid provider metadata for ${source.slug}`);
+  }
 
   return {
     ...meta,
@@ -70,14 +83,9 @@ async function fetchProvider(source: ProviderSource): Promise<Provider> {
   };
 }
 
-let providersPromise: Promise<Provider[]> | undefined;
-
 export async function getProviders() {
-  // Share pending requests; let Next's fetch cache handle freshness afterward.
-  providersPromise ??= Promise.all(providerSources.map(fetchProvider)).finally(() => {
-    providersPromise = undefined;
-  });
-  return providersPromise;
+  // Each render must reach fetch so Next can track its revalidation interval.
+  return Promise.all(providerSources.map(fetchProvider));
 }
 
 export async function getAllProviderFeatures() {

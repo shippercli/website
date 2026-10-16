@@ -1,4 +1,5 @@
 """Check local anchor links in the generated production HTML."""
+import json
 from html.parser import HTMLParser
 from pathlib import Path
 import sys
@@ -53,11 +54,25 @@ def verify(build, public):
     return len(pages)
 
 
+def verify_provider_revalidation(manifest):
+    routes = {path: value for path, value in manifest.get('routes', {}).items()
+              if path == '/providers' or path.startswith('/providers/')}
+    if '/providers' not in routes or len(routes) < 2:
+        raise RuntimeError('Provider routes missing from prerender manifest')
+    invalid = [path for path, value in routes.items() if value.get('initialRevalidateSeconds') != 300]
+    if invalid:
+        raise RuntimeError('Provider routes must revalidate after 300 seconds: ' + ', '.join(invalid))
+    return len(routes)
+
+
 if __name__ == '__main__':
     root = Path(__file__).resolve().parents[1]
     try:
         count = verify(root / '.next/server/app', root / 'public')
+        provider_count = verify_provider_revalidation(json.loads((root / '.next/prerender-manifest.json').read_text()))
     except (RuntimeError, ValueError) as error:
         print(error, file=sys.stderr)
         sys.exit(1)
     print(f'Local routes and fragment targets verified across {count} production HTML pages')
+
+    print(f'Five-minute revalidation verified for {provider_count} provider routes')
