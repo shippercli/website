@@ -69,3 +69,16 @@ preserves ordinary documentation structure, code language classes and images;
 it omits scripts, event attributes, embedded frames/forms and unsafe URL schemes.
 Raw repository HTML must not rely on executable content or arbitrary attributes.
 Regression coverage lives in `tests/markdown-links.test.mjs`.
+
+An optional browser regression exercises the shared Markdown renderer with
+malicious HTML and verifies the resulting DOM in Chrome:
+
+```sh
+node tests/browser/markdown-security.mjs
+```
+
+Provide Playwright through `SHIPPER_PLAYWRIGHT_MODULE` when it is not installed
+locally, and optionally select Chrome with `SHIPPER_BROWSER_EXECUTABLE`. The
+regression uses an isolated document and blocks network requests; it needs no
+running site. It is separate from `npm test` and CI and does not verify a hosted
+deployment's browser behavior.
