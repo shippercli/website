@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { scheduleProviderRotation } from "@/lib/provider-rotation.mjs";
 
 const providerExamples = [
   {
@@ -27,14 +28,9 @@ export default function ProviderConfigRotator() {
 
   useEffect(() => {
     if (!rotating) return;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const interval = window.setInterval(() => {
-      if (!reducedMotion.matches) {
-        setIndex((current) => (current + 1) % providerExamples.length);
-      }
-    }, 2000);
-
-    return () => window.clearInterval(interval);
+    return scheduleProviderRotation(window, () => {
+      setIndex((current) => (current + 1) % providerExamples.length);
+    });
   }, [rotating]);
 
   const example = providerExamples[index];
