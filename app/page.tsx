@@ -57,7 +57,7 @@ export default function Home() {
             >
               <div className="font-mono text-sm">
                 <div className="mb-3" style={{ color: "#4ade80" }}>
-                  Terminal
+                  Example commands
                 </div>
                 <div style={{ color: "var(--text-secondary)" }}>
                   $ composer global require shippercli/cli
@@ -65,23 +65,14 @@ export default function Home() {
                 <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
                   $ shipper plan <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
-                <div className="mt-1" style={{ color: "#4ade80" }}>
-                  + Create site <span className="marker-highlight marker-highlight-pink">api.example.com</span>
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Configure SSL (Let&apos;s Encrypt)
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Link database <span className="marker-highlight marker-highlight-purple">myapp_production</span>
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Deploy from <span className="marker-highlight marker-highlight-green">main</span> branch
+                <div className="mt-1" style={{ color: "var(--text-secondary)" }}>
+                  Review provider-specific actions and any blocked reasons.
                 </div>
                 <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
                   $ shipper apply <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
                 <div className="mt-3" style={{ color: "var(--accent)" }}>
-                  ✓ All resources applied successfully
+                  Applies changes supported by the selected provider.
                 </div>
               </div>
             </div>
@@ -103,27 +94,27 @@ export default function Home() {
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Ploi, Forge, EasyPanel, cPanel, and more. One config, any provider.",
+                  desc: "Use one project config with supported providers. Available capabilities vary by provider.",
                 },
                 {
                   title: "Plan & Apply",
-                  desc: "Preview changes before deploying. No surprises.",
+                  desc: "Review provider-specific actions and blockers before applying.",
                 },
                 {
                   title: "Database Lifecycle",
-                  desc: "Create, link, and manage databases automatically.",
+                  desc: "Creation, adoption, credential delivery, and cleanup depend on provider support.",
                 },
                 {
                   title: "PR Previews",
-                  desc: "Spin up preview environments for every pull request.",
+                  desc: "Deploy previews from configured workflows. Set up cleanup separately.",
                 },
                 {
                   title: "GitHub Actions",
-                  desc: "CI/CD out of the box. Deploy on push or PR.",
+                  desc: "Run Shipper from workflows you configure for deployment and cleanup.",
                 },
                 {
                   title: "Config Validation",
-                  desc: "Catch misconfigurations before they hit production.",
+                  desc: "Validate configuration before applying provider changes.",
                 },
               ].map((f) => (
                 <div

@@ -1,6 +1,11 @@
 import { getAllSpecs, getSpecsNavigation } from "@/lib/specs";
 import { KnowledgeIndex } from "@/components/knowledge-base";
 
+export const metadata = {
+  title: "Specifications — Shipper CLI",
+  description: "Explore Shipper architecture, deployment behavior and capability specifications.",
+};
+
 export const dynamic = "force-static";
 
 export default function SpecsPage() {

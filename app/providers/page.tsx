@@ -2,6 +2,11 @@ import Link from "next/link";
 import { getProviders } from "./providers";
 import ProviderLogo from "@/components/provider-logo";
 
+export const metadata = {
+  title: "Deployment Providers — Shipper CLI",
+  description: "Compare Shipper deployment providers, configuration options and supported capabilities.",
+};
+
 export default async function ProvidersPage() {
   const providers = await getProviders();
   const betaCount = providers.filter((provider) => provider.status === "beta").length;

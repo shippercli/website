@@ -1,6 +1,11 @@
 import { getAllDocs, getDocsNavigation } from "@/lib/docs";
 import { KnowledgeIndex } from "@/components/knowledge-base";
 
+export const metadata = {
+  title: "Documentation — Shipper CLI",
+  description: "Learn to configure, plan and deploy projects with Shipper CLI.",
+};
+
 export const dynamic = "force-static";
 
 export default function DocsPage() {

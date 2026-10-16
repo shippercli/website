@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { initializeTheme, persistTheme } from "@/lib/theme.mjs";
 
 type Theme = "light" | "dark";
 
@@ -14,15 +15,7 @@ export default function ThemeToggle() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("shipper-theme");
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme: Theme = savedTheme === "dark" || savedTheme === "light"
-      ? (savedTheme as Theme)
-      : systemDark
-        ? "dark"
-        : "light";
-
-    applyTheme(initialTheme);
+    const initialTheme = initializeTheme(window);
     setTheme(initialTheme);
     setReady(true);
   }, []);
@@ -31,7 +24,7 @@ export default function ThemeToggle() {
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     applyTheme(nextTheme);
-    window.localStorage.setItem("shipper-theme", nextTheme);
+    persistTheme(window, nextTheme);
   }
 
   return (

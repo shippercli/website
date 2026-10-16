@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 
 type DocSectionBase = "/docs" | "/specs";
 
@@ -13,22 +14,19 @@ function rewriteRelativeHref(href: string, base: DocSectionBase): string {
   if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|mailto:|tel:)/i.test(href)) return href;
   if (href.startsWith("/")) return href;
 
-  const isParentLink = href.startsWith("../");
-  const isCurrentDirLink = href.startsWith("./");
-  if (!isParentLink && !isCurrentDirLink) return href;
+  const match = href.match(/^([^?#]*)(\?[^#]*)?(#.*)?$/);
+  if (!match) return href;
+  const [, pathPart, query = "", fragment = ""] = match;
+  const isParentLink = pathPart.startsWith("../");
+  const isCurrentDirLink = pathPart.startsWith("./");
+  if (!isParentLink && !isCurrentDirLink && !/\.md$/i.test(pathPart)) return href;
 
-  const [pathPart, hash = ""] = href.split("#", 2);
   const sanitizedPath = pathPart.replace(/\.md$/i, "").replace(/^\.\.\/|^\.\//, "").toLowerCase();
-
-  if (isParentLink && sanitizedPath === "README") return `/${hash ? `${hash.startsWith("#") ? "" : "#"}${hash}` : ""}` || "/";
-  if (isParentLink && sanitizedPath === "ROADMAP") return "/";
-
-  if (isCurrentDirLink || isParentLink) {
-    const fragment = hash ? `#${hash}` : "";
-    return `${base}/${sanitizedPath}${fragment}`;
+  if (isParentLink && (sanitizedPath === "readme" || sanitizedPath === "roadmap")) {
+    return `/${query}${fragment}`;
   }
 
-  return href;
+  return `${base}/${sanitizedPath}${query}${fragment}`;
 }
 
 function rewriteMarkdownLinks(html: string, base: DocSectionBase): string {
@@ -41,5 +39,13 @@ function rewriteMarkdownLinks(html: string, base: DocSectionBase): string {
 
 export function parseMarkdownToHtml(content: string, base: DocSectionBase): string {
   const htmlContent = marked.parse(content) as string;
-  return rewriteMarkdownLinks(htmlContent, base);
+  return sanitizeHtml(rewriteMarkdownLinks(htmlContent, base), {
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img"],
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      code: ["class"],
+    },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
+    allowProtocolRelative: false,
+  });
 }
