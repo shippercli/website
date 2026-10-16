@@ -86,7 +86,7 @@ export function getDoc(slug: string): DocPage | null {
 
 export function getDocsNavigation(): Record<string, { slug: string; title: string }[]> {
   const docs = getAllDocs();
-  const sections: Record<string, { slug: string; title: string }[]> = {};
+  const sections: Record<string, { slug: string; title: string }[]> = Object.create(null);
 
   docs.forEach((doc) => {
     sections[doc.section] ??= [];
