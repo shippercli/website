@@ -59,6 +59,9 @@ export default function Home() {
                 <div className="mb-3" style={{ color: "#4ade80" }}>
                   Terminal
                 </div>
+                <div className="mb-3 text-xs" style={{ color: "var(--text-secondary)" }}>
+                  Illustrative output; actions vary by provider and configuration.
+                </div>
                 <div style={{ color: "var(--text-secondary)" }}>
                   $ composer global require shippercli/cli
                 </div>
@@ -72,7 +75,7 @@ export default function Home() {
                   + Configure SSL (Let&apos;s Encrypt)
                 </div>
                 <div style={{ color: "#4ade80" }}>
-                  + Link database <span className="marker-highlight marker-highlight-purple">myapp_production</span>
+                  + Database operation per provider <span className="marker-highlight marker-highlight-purple">myapp_production</span>
                 </div>
                 <div style={{ color: "#4ade80" }}>
                   + Deploy from <span className="marker-highlight marker-highlight-green">main</span> branch
@@ -81,7 +84,7 @@ export default function Home() {
                   $ shipper apply <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
                 </div>
                 <div className="mt-3" style={{ color: "var(--accent)" }}>
-                  ✓ All resources applied successfully
+                  ✓ Apply completed; verify provider-specific resources
                 </div>
               </div>
             </div>
@@ -103,27 +106,27 @@ export default function Home() {
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Ploi, Forge, EasyPanel, cPanel, and more. One config, any provider.",
+                  desc: "Use shared configuration across supported providers, with provider-specific capabilities.",
                 },
                 {
                   title: "Plan & Apply",
-                  desc: "Preview changes before deploying. No surprises.",
+                  desc: "Review the provider's plan before applying changes.",
                 },
                 {
                   title: "Database Lifecycle",
-                  desc: "Create, link, and manage databases automatically.",
+                  desc: "Creation, reuse, credentials, and cleanup depend on the provider.",
                 },
                 {
                   title: "PR Previews",
-                  desc: "Spin up preview environments for every pull request.",
+                  desc: "Deploy previews through configured workflows; configure cleanup separately.",
                 },
                 {
                   title: "GitHub Actions",
-                  desc: "CI/CD out of the box. Deploy on push or PR.",
+                  desc: "Use the GitHub Actions examples with your workflows and credentials.",
                 },
                 {
                   title: "Config Validation",
-                  desc: "Catch misconfigurations before they hit production.",
+                  desc: "Validate configuration before applying it.",
                 },
               ].map((f) => (
                 <div
