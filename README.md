@@ -22,6 +22,21 @@ npm install
 npm run dev
 ```
 
+## Documentation mirrors
+
+`npm run sync-content` clones the docs/spec repositories into unique staging
+folders, validates both source trees, and replaces the generated `docs`/`spec`
+mirrors. Removed upstream pages disappear from the mirror. Both sources must be
+ready before replacement starts; missing/empty content and symlinks are refused.
+The command logs the exact source commits it copied.
+
+An ordinary replacement failure restores the prior mirrors. If recovery itself
+fails, backups remain in the reported `.content-sync-*` folder for manual repair.
+The two directory replacements are not a single filesystem transaction; process
+termination or concurrent edits can still interrupt them. Root dotfiles are not
+mirrored, matching the prior copy policy. Temporary stages are ignored by Git.
+CI refuses both modified tracked mirror files and newly copied untracked pages.
+
 ## Browser preference checks
 
 `npm test` covers theme storage failures and the provider carousel's timer/media

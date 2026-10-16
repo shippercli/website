@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "npm run sync-content && next build",
     "start": "next start",
-    "sync-content": "mkdir -p docs spec && git clone --depth 1 https://github.com/shippercli/docs.git docs-tmp && cp -r docs-tmp/v1/* docs/ && rm -rf docs-tmp && git clone --depth 1 https://github.com/shippercli/specs.git spec-tmp && cp -r spec-tmp/* spec/ && rm -rf spec-tmp"
+    "sync-content": "node scripts/sync-content.mjs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
