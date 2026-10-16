@@ -23,21 +23,45 @@ const providerExamples = [
 
 export default function ProviderConfigRotator() {
   const [index, setIndex] = useState(0);
+  const [rotating, setRotating] = useState(true);
 
   useEffect(() => {
+    if (!rotating) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const interval = window.setInterval(() => {
-      setIndex((current) => (current + 1) % providerExamples.length);
+      if (!reducedMotion.matches) {
+        setIndex((current) => (current + 1) % providerExamples.length);
+      }
     }, 2000);
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [rotating]);
 
   const example = providerExamples[index];
 
   return (
     <div className="font-mono text-sm">
-      <div className="mb-2" style={{ color: "var(--accent)" }}>
-        shipper.yml
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2" style={{ color: "var(--accent)" }}>
+        <span>shipper.yml</span>
+        <div className="flex gap-2 text-xs">
+          <button
+            type="button"
+            className="rounded border px-2 py-1"
+            onClick={() => setRotating((current) => !current)}
+          >
+            {rotating ? "Pause rotation" : "Resume rotation"}
+          </button>
+          <button
+            type="button"
+            className="rounded border px-2 py-1"
+            onClick={() => {
+              setRotating(false);
+              setIndex((current) => (current + 1) % providerExamples.length);
+            }}
+          >
+            Next provider
+          </button>
+        </div>
       </div>
       <div style={{ color: "var(--text-secondary)" }}>providers:</div>
       <div className="ml-4 transition-all duration-300" style={{ color: "var(--text-secondary)" }}>
