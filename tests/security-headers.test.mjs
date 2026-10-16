@@ -18,6 +18,7 @@ test("content security policy limits resource origins and disables object conten
   assert.match(policy, /object-src 'none'/);
   assert.match(policy, /frame-ancestors 'none'/);
   assert.match(policy, /base-uri 'self'/);
+  assert.match(policy, /script-src-attr 'none'/);
   assert.match(policy, /upgrade-insecure-requests/);
   assert.doesNotMatch(policy, /unsafe-eval|https?:/);
 });
