@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Temporary content stages and retained recovery backups
 /.content-sync-*/
+
+# Python verification caches
+__pycache__/
