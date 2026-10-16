@@ -17,7 +17,7 @@ const providerExamples = [
   },
   {
     providerKey: "easypanel",
-    providerSetting: 'host: "me.easypanel.io"',
+    providerSetting: 'url: "https://me.easypanel.io"',
   },
 ];
 
@@ -55,6 +55,14 @@ export default function ProviderConfigRotator() {
       <div className="ml-8 transition-all duration-300" style={{ color: "var(--text-muted)" }}>
         provider: <span className="marker-highlight marker-highlight-blue">{example.providerKey}</span>
       </div>
+      <div className="ml-8" style={{ color: "var(--text-muted)" }}>databases:</div>
+      <div className="ml-12" style={{ color: "var(--text-muted)" }}>main:</div>
+      <div className="ml-16" style={{ color: "var(--text-muted)" }}>
+        name: &quot;<span className="marker-highlight marker-highlight-purple">{'myapp_${PROFILE}'}</span>&quot;
+      </div>
+      <div className="ml-16" style={{ color: "var(--text-muted)" }}>
+        user: &quot;{'myapp_${PROFILE}'}&quot;
+      </div>
       <div className="ml-8" style={{ color: "var(--text-muted)" }}>
         profiles:
       </div>
@@ -67,15 +75,6 @@ export default function ProviderConfigRotator() {
       <div className="ml-16" style={{ color: "var(--text-muted)" }}>
         domain: &quot;<span className="marker-highlight marker-highlight-pink">api.example.com</span>&quot;
       </div>
-      <div className="ml-16" style={{ color: "var(--text-muted)" }}>
-        databases:
-      </div>
-      <div className="ml-20" style={{ color: "var(--text-muted)" }}>
-        main:
-      </div>
-      <div className="ml-24" style={{ color: "var(--text-muted)" }}>
-        name: &quot;<span className="marker-highlight marker-highlight-purple">myapp_production</span>&quot;
-      </div>
       <div className="ml-12" style={{ color: "var(--text-muted)" }}>
         <span className="marker-highlight marker-highlight-yellow">staging</span>:
       </div>
@@ -84,15 +83,6 @@ export default function ProviderConfigRotator() {
       </div>
       <div className="ml-16" style={{ color: "var(--text-muted)" }}>
         domain: &quot;<span className="marker-highlight marker-highlight-pink">api.example-test.com</span>&quot;
-      </div>
-      <div className="ml-16" style={{ color: "var(--text-muted)" }}>
-        databases:
-      </div>
-      <div className="ml-20" style={{ color: "var(--text-muted)" }}>
-        main:
-      </div>
-      <div className="ml-24" style={{ color: "var(--text-muted)" }}>
-        name: &quot;<span className="marker-highlight marker-highlight-purple">myapp_staging</span>&quot;
       </div>
     </div>
   );
