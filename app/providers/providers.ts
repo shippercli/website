@@ -52,6 +52,7 @@ function rawGithubUrl(repo: string, path: string) {
 async function fetchProvider(source: ProviderSource): Promise<Provider> {
   const response = await fetch(rawGithubUrl(source.repo, "meta.json"), {
     next: { revalidate: 300 },
+    signal: AbortSignal.timeout(10_000),
   });
 
   if (!response.ok) {
@@ -72,7 +73,10 @@ async function fetchProvider(source: ProviderSource): Promise<Provider> {
 let providersPromise: Promise<Provider[]> | undefined;
 
 export async function getProviders() {
-  providersPromise ??= Promise.all(providerSources.map(fetchProvider));
+  // Share pending requests; let Next's fetch cache handle freshness afterward.
+  providersPromise ??= Promise.all(providerSources.map(fetchProvider)).finally(() => {
+    providersPromise = undefined;
+  });
   return providersPromise;
 }
 
