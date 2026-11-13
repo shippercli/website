@@ -30,7 +30,11 @@ jobs:
       - name: Verify mirrored content is current
         run: |
           npm run sync-content
-          git diff --exit-code -- docs spec
+          changes="$(git status --porcelain --untracked-files=all -- docs spec)"
+          if [ -n "$changes" ]; then
+            printf '%s\n' "$changes"
+            exit 1
+          fi
 
       - name: Type-check
         run: npx tsc --noEmit
