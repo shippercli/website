@@ -86,12 +86,13 @@ export function getDoc(slug: string): DocPage | null {
 
 export function getDocsNavigation(): Record<string, { slug: string; title: string }[]> {
   const docs = getAllDocs();
-  const sections: Record<string, { slug: string; title: string }[]> = {};
+  const sections = new Map<string, { slug: string; title: string }[]>();
 
   docs.forEach((doc) => {
-    sections[doc.section] ??= [];
-    sections[doc.section].push({ slug: doc.slug, title: doc.title });
+    const entries = sections.get(doc.section) ?? [];
+    entries.push({ slug: doc.slug, title: doc.title });
+    sections.set(doc.section, entries);
   });
 
-  return sections;
+  return Object.fromEntries(sections);
 }
