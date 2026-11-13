@@ -29,6 +29,8 @@ jobs:
 
       - name: Verify mirrored content is current
         run: |
+          # Rebuild tracked mirrors from scratch in this disposable checkout.
+          git ls-files -z -- docs spec | xargs -0 -r rm --
           npm run sync-content
           changes="$(git status --porcelain --untracked-files=all -- docs spec)"
           if [ -n "$changes" ]; then
