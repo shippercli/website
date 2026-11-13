@@ -1,5 +1,24 @@
 import Image from "next/image";
-import ProviderConfigRotator from "@/components/provider-config-rotator";
+const exampleConfig = `providers:
+  coolify:
+    url: \${COOLIFY_URL}
+    api_token: \${COOLIFY_API_TOKEN}
+    server_uuid: \${COOLIFY_SERVER_UUID}
+    project_uuid: \${COOLIFY_PROJECT_UUID}
+projects:
+  shipper-reusable-fixture:
+    provider: coolify
+    ssl:
+      enabled: false
+    profiles:
+      production:
+        domain: shipper-reusable-fixture.test
+        coolify:
+          environment_name: production
+          source_type: docker_image
+          docker_image: nginx
+          docker_registry_image_tag: alpine
+          ports_exposes: "80"`;
 
 export default function Home() {
   return (
@@ -37,18 +56,19 @@ export default function Home() {
 
           <div className="flex flex-col md:flex-row gap-6 max-w-7xl mx-auto text-left">
             <div
-              className="flex-1 backdrop-blur-xl rounded-2xl p-8 border"
+              className="min-w-0 flex-1 backdrop-blur-xl rounded-2xl p-8 border"
               style={{
                 background: "var(--surface-glass)",
                 borderColor: "var(--border)",
                 boxShadow: "0 8px 32px rgba(122, 162, 255, 0.08)",
               }}
             >
-              <ProviderConfigRotator />
+              <p className="mb-2 font-mono text-sm">shipper.yml</p>
+              <pre className="overflow-x-auto text-sm">{exampleConfig}</pre>
             </div>
 
             <div
-              className="flex-1 backdrop-blur-xl rounded-2xl p-8 border"
+              className="min-w-0 flex-1 backdrop-blur-xl rounded-2xl p-8 border"
               style={{
                 background: "var(--surface-glass)",
                 borderColor: "var(--border)",
@@ -59,30 +79,12 @@ export default function Home() {
                 <div className="mb-3" style={{ color: "#4ade80" }}>
                   Terminal
                 </div>
-                <div style={{ color: "var(--text-secondary)" }}>
-                  $ composer global require shippercli/cli
-                </div>
-                <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
-                  $ shipper plan <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
-                </div>
-                <div className="mt-1" style={{ color: "#4ade80" }}>
-                  + Create site <span className="marker-highlight marker-highlight-pink">api.example.com</span>
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Configure SSL (Let&apos;s Encrypt)
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Link database <span className="marker-highlight marker-highlight-purple">myapp_production</span>
-                </div>
-                <div style={{ color: "#4ade80" }}>
-                  + Deploy from <span className="marker-highlight marker-highlight-green">main</span> branch
-                </div>
-                <div className="mt-4" style={{ color: "var(--text-secondary)" }}>
-                  $ shipper apply <span className="marker-highlight marker-highlight-orange">api</span> --profile=<span className="marker-highlight marker-highlight-yellow">production</span>
-                </div>
-                <div className="mt-3" style={{ color: "var(--accent)" }}>
-                  ✓ All resources applied successfully
-                </div>
+                <pre className="overflow-x-auto">{`$ composer init --name=local/shipper-deployment --no-interaction
+$ composer config repositories.provider-coolify git https://github.com/shippercli/provider-coolify.git
+$ composer require shippercli/cli:1.0.10 shippercli/provider-coolify:1.0.9
+$ vendor/bin/shipper validate
+$ vendor/bin/shipper plan shipper-reusable-fixture --profile=production
+$ vendor/bin/shipper apply shipper-reusable-fixture --profile=production`}</pre>
               </div>
             </div>
           </div>
@@ -103,7 +105,7 @@ export default function Home() {
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Ploi, Forge, EasyPanel, cPanel, and more. One config, any provider.",
+                  desc: "Use one CLI with providers for Coolify, Ploi, Forge, EasyPanel, and cPanel.",
                 },
                 {
                   title: "Plan & Apply",
@@ -111,11 +113,11 @@ export default function Home() {
                 },
                 {
                   title: "Database Lifecycle",
-                  desc: "Create, link, and manage databases automatically.",
+                  desc: "Manage database resources where your provider supports them.",
                 },
                 {
                   title: "PR Previews",
-                  desc: "Spin up preview environments for every pull request.",
+                  desc: "Configure pull request previews on supported providers.",
                 },
                 {
                   title: "GitHub Actions",
@@ -156,7 +158,7 @@ export default function Home() {
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a
-                href="/docs"
+                href="/docs/getting-started"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all"
                 style={{ background: "var(--accent)", color: "white" }}
               >
@@ -173,17 +175,6 @@ export default function Home() {
                 View Providers
               </a>
             </div>
-            <code
-              className="rounded-xl px-8 py-4 font-mono text-sm inline-block border"
-              style={{
-                background: "var(--surface)",
-                borderColor: "var(--border)",
-                color: "var(--text-secondary)",
-                boxShadow: "0 4px 16px rgba(122, 162, 255, 0.06)",
-              }}
-            >
-              $ composer global require shippercli/cli
-            </code>
           </div>
         </section>
       </main>
