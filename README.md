@@ -29,3 +29,5 @@ Deployed automatically to Vercel on push to main.
 ## License
 
 MIT
+
+[![advertisement](https://ads.servead.net/i/803c9826-1dd1-42dd-8b8c-8a8d16c055b5.svg)](https://ads.servead.net/c/803c9826-1dd1-42dd-8b8c-8a8d16c055b5)
