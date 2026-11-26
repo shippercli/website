@@ -28,10 +28,12 @@ const providerSources: ProviderSource[] = [
   { slug: "cpanel", repo: "shippercli/provider-cpanel" },
   { slug: "easypanel", repo: "shippercli/provider-easypanel" },
   { slug: "coolify", repo: "shippercli/provider-coolify" },
+  { slug: "ftp", repo: "shippercli/provider-ftp" },
 ];
 
 const featureAliases: Record<string, string> = {
   "Application Deployment": "Application Deployment",
+  "File Deployment": "Application Deployment",
   "Static and PHP Deployments": "Application Deployment",
   "Site Management": "Application Deployment",
   "Domain Mapping": "Domain Management",
