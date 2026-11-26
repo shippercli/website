@@ -43,6 +43,21 @@ export default async function ProviderConfigurationPage({
           </pre>
         </section>
 
+        {provider.slug === "ftp" ? (
+          <section className="provider-content-section">
+            <div className="provider-panel">
+              <h3>Choose the artifact and destination</h3>
+              <p>
+                Set the project provider to ftp. Under each profile, configure ftp.local_path and
+                ftp.remote_path; the destination must be a dedicated non-root directory. The initial
+                deployment requires an empty directory. Configure ftp.exclude for additional exact
+                relative paths or directory prefixes.
+              </p>
+              <a href="/docs/ftp">See the complete shipper.yml example and TLS options</a>
+            </div>
+          </section>
+        ) : null}
+
         <section className="provider-content-section">
           <div className="provider-section-heading">
             <div><span>Configuration guidance</span><h2>What belongs where</h2></div>

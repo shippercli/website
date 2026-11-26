@@ -34,6 +34,27 @@ export default async function ProviderDocumentationPage({
   return (
     <ProviderDetailShell provider={provider} active="documentation">
       <div className="provider-content-stack">
+        {provider.slug === "ftp" ? (
+          <section className="provider-content-section">
+            <div className="provider-section-heading">
+              <div><span>FTP / FTPS guide</span><h2>Deploy a prebuilt artifact</h2></div>
+            </div>
+            <div className="provider-panel">
+              <p>
+                Build locally, then upload to a dedicated non-root directory that is empty on first
+                deployment. Explicit FTPS verifies certificates and hostnames on control and data
+                connections. The server must support MLSD and overwrite by rename.
+              </p>
+              <p>
+                Status reports the deployment journal, rather than application health. There is no
+                rollback, runtime management, or multi-file atomic deployment. Destroy removes tracked
+                files and preserves unrelated files and directories.
+              </p>
+              <a href="/docs/ftp">Read the full configuration and recovery guide</a>
+            </div>
+          </section>
+        ) : null}
+
         <section className="provider-content-section">
           <div className="provider-section-heading">
             <div><span>Provider notes</span><h2>Operating {provider.name} through Shipper</h2></div>
@@ -77,7 +98,7 @@ export default async function ProviderDocumentationPage({
             <ul className="provider-checklist">
               <li>Validate authentication and resource identifiers against a non-critical project first.</li>
               <li>Confirm every feature you plan to use on the overview page support matrix.</li>
-              <li>Test deploy, rollback, and any provider-managed resources on the exact account type you run in production.</li>
+              <li>Test deploy, cleanup, and each supported operation on the exact account type you run in production.</li>
             </ul>
           </div>
         </section>

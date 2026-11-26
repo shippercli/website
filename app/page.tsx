@@ -105,7 +105,7 @@ $ vendor/bin/shipper apply shipper-reusable-fixture --profile=production`}</pre>
               {[
                 {
                   title: "Provider Agnostic",
-                  desc: "Use one CLI with providers for Coolify, Ploi, Forge, EasyPanel, and cPanel.",
+                  desc: "Use one CLI with providers for Coolify, Ploi, Forge, EasyPanel, cPanel, and FTP/FTPS.",
                 },
                 {
                   title: "Plan & Apply",
